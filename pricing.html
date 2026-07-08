@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Frantz DevTool Suite — Pricing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#282a36;--bg2:#21222c;--surface:#44475a;--surface2:#383a4a;--text:#f8f8f2;--text2:#bd93f9;--muted:#6272a4;
+--accent:#bd93f9;--accent2:#ff79c6;--green:#50fa7b;--orange:#ffb86c;--red:#ff5555;--cyan:#8be9fd;--gold:#f1fa8c;
+--border:#44475a;--radius:12px;--font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--surface);border-radius:3px}
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:44px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;font-size:.75rem}
+.top-nav .brand{font-weight:700;display:flex;align-items:center;gap:5px}
+.top-nav .brand span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.top-nav .links{margin-left:auto;display:flex;gap:8px}
+.top-nav .links a{padding:3px 8px;border-radius:5px;font-size:.6rem;color:var(--muted);text-decoration:none}
+.top-nav .links a:hover{color:var(--text);background:var(--surface)}
+.main{max-width:960px;margin:0 auto;padding:60px 12px 24px}
+.hero{text-align:center;padding:20px 0 16px}
+.hero h1{font-size:1.6rem;margin-bottom:4px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--muted);font-size:.78rem;max-width:600px;margin:0 auto;line-height:1.6}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.pricing-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;position:relative;transition:all .3s}
+.pricing-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.pricing-card.featured{border-color:var(--accent);box-shadow:0 0 24px rgba(189,147,249,.15)}
+.pricing-card.featured .badge{position:absolute;top:-10px;right:16px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);font-size:.55rem;font-weight:700;padding:3px 10px;border-radius:20px}
+.pricing-card .name{font-size:.75rem;font-weight:600;color:var(--muted);margin-bottom:2px}
+.pricing-card .price{font-size:1.8rem;font-weight:800;margin:6px 0 2px}
+.pricing-card .price span{font-size:.7rem;font-weight:400;color:var(--muted)}
+.pricing-card .desc{font-size:.6rem;color:var(--muted);margin-bottom:12px}
+.pricing-card ul{list-style:none;font-size:.65rem;line-height:2;margin-bottom:14px}
+.pricing-card ul li{display:flex;align-items:center;gap:6px}
+.pricing-card ul li .check{color:var(--green);font-weight:700}
+.pricing-card ul li .minus{color:var(--muted);opacity:.4}
+.pricing-card .btn{display:block;text-align:center;padding:8px;border-radius:8px;border:none;font-size:.65rem;font-weight:700;cursor:pointer;text-decoration:none}
+.pricing-card .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg)}
+.pricing-card .btn-primary:hover{opacity:.85}
+.pricing-card .btn-secondary{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+.pricing-card .btn-secondary:hover{border-color:var(--accent)}
+
+/* Tool grid */
+.tool-showcase{margin-top:24px}
+.tool-showcase h3{font-size:.9rem;color:var(--text2);margin-bottom:10px;text-align:center}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px}
+.tool-grid .item{padding:8px;border-radius:8px;border:1px solid var(--border);text-align:center;background:var(--bg2);font-size:.65rem;transition:all .2s}
+.tool-grid .item:hover{border-color:var(--accent);background:var(--surface2)}
+.tool-grid .item .ic{font-size:1.2rem;margin-bottom:2px}
+.tool-grid .item .nm{font-weight:600;font-size:.7rem}
+.tool-grid .item .st{font-size:.5rem;color:var(--muted);margin-top:2px}
+
+/* FAQ */
+.faq{margin-top:24px}
+.faq h3{font-size:.9rem;color:var(--text2);margin-bottom:10px;text-align:center}
+.faq-item{padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;margin-bottom:6px;cursor:pointer}
+.faq-item .q{font-weight:600;font-size:.72rem;display:flex;justify-content:space-between}
+.faq-item .q .arrow{color:var(--muted);transition:transform .2s}
+.faq-item.open .q .arrow{transform:rotate(180deg)}
+.faq-item .a{font-size:.64rem;color:var(--muted);margin-top:6px;display:none;line-height:1.6}
+.faq-item.open .a{display:block}
+
+footer{text-align:center;padding:20px 12px;font-size:.65rem;color:var(--muted);border-top:1px solid var(--border);margin-top:24px}
+footer a{color:var(--accent);text-decoration:none}
+
+@media(max-width:700px){.pricing-grid{grid-template-columns:1fr;gap:10px}.tool-grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+<div class="brand">⚡ <span>DevTool Suite</span></div>
+<div class="links">
+<a href="https://frantzenterprise.github.io/devtool-suite/">Hub</a>
+<a href="#">Pricing</a>
+</div>
+</nav>
+<div class="main">
+<div class="hero">
+<h1>One Suite. Every Tool.</h1>
+<p>11 developer tools. One subscription. All data stays in your browser — privacy first, always.</p>
+</div>
+
+<div class="pricing-grid">
+<!-- Free -->
+<div class="pricing-card">
+<div class="name">🆓 Free</div>
+<div class="price">$0 <span>/month</span></div>
+<div class="desc">Core functionality of every tool</div>
+<ul>
+<li><span class="check">✓</span> All 11 tools — full features</li>
+<li><span class="check">✓</span> No signup required</li>
+<li><span class="check">✓</span> Privacy-first, all local</li>
+<li><span class="minus">—</span> No save/export </li>
+<li><span class="minus">—</span> No custom presets</li>
+</ul>
+<a href="https://frantzenterprise.github.io/devtool-suite/" class="btn btn-secondary">Get Started Free</a>
+</div>
+
+<!-- Pro -->
+<div class="pricing-card featured">
+<div class="badge">BEST VALUE</div>
+<div class="name">⚡ Pro</div>
+<div class="price">$6 <span>/month</span></div>
+<div class="desc">Power users who want to save and export</div>
+<ul>
+<li><span class="check">✓</span> All 11 tools — full features</li>
+<li><span class="check">✓</span> Save up to 10 scenarios per tool</li>
+<li><span class="check">✓</span> Export (CSV, Markdown, JSON, CSS)</li>
+<li><span class="check">✓</span> Custom presets &amp; favorites</li>
+<li><span class="minus">—</span> Limited to 10 saves per tool</li>
+</ul>
+<a href="#" class="btn btn-primary" onclick="alert('🎉 Pro plan coming soon with Stripe checkout!')">Subscribe $6/mo</a>
+</div>
+
+<!-- Team -->
+<div class="pricing-card">
+<div class="name">🏢 Team</div>
+<div class="price">$19 <span>/month</span></div>
+<div class="desc">Teams that collaborate and share</div>
+<ul>
+<li><span class="check">✓</span> All 11 tools — full features</li>
+<li><span class="check">✓</span> Unlimited saves per tool</li>
+<li><span class="check">✓</span> Share collections with your team</li>
+<li><span class="check">✓</span> Everything in Pro</li>
+<li><span class="check">✓</span> 5 team seats</li>
+</ul>
+<a href="#" class="btn btn-primary" onclick="alert('🎉 Team plan coming soon with Stripe checkout!')">Subscribe $19/mo</a>
+</div>
+</div>
+
+<!-- Tool showcase -->
+<div class="tool-showcase">
+<h3>🔧 All 11 Tools Included</h3>
+<div class="tool-grid">
+<div class="item"><div class="ic">📊</div><div class="nm">ModelCompare</div><div class="st">AI model comparison</div></div>
+<div class="item"><div class="ic">💰</div><div class="nm">API Cost Calc</div><div class="st">Cost projection</div></div>
+<div class="item"><div class="ic">🧪</div><div class="nm">Prompt Bench</div><div class="st">Test models</div></div>
+<div class="item"><div class="ic">⏰</div><div class="nm">Crontab Guru</div><div class="st">Visual cron builder</div></div>
+<div class="item"><div class="ic">🔍</div><div class="nm">Regex Builder</div><div class="st">Regex tester</div></div>
+<div class="item"><div class="ic">🔐</div><div class="nm">JWT Inspector</div><div class="st">Token decoder</div></div>
+<div class="item"><div class="ic">🎨</div><div class="nm">Palette Studio</div><div class="st">Color palettes</div></div>
+<div class="item"><div class="ic">🔄</div><div class="nm">JSON ↔ CSV</div><div class="st">Data transformer</div></div>
+<div class="item"><div class="ic">✨</div><div class="nm">Anim Studio</div><div class="st">Text &amp; image FX</div></div>
+<div class="item"><div class="ic">🌿</div><div class="nm">Git Builder</div><div class="st">Git commands</div></div>
+<div class="item"><div class="ic">🌐</div><div class="nm">IP Network</div><div class="st">Subnet, DNS, ports</div></div>
+</div>
+</div>
+
+<div class="faq">
+<h3>❓ Frequently Asked Questions</h3>
+<div class="faq-item" onclick="this.classList.toggle('open')">
+<div class="q">How does billing work? <span class="arrow">▼</span></div>
+<div class="a">Monthly subscription. Cancel anytime — no contracts, no hidden fees. Your saved data stays in your browser and works even if you cancel.</div>
+</div>
+<div class="faq-item" onclick="this.classList.toggle('open')">
+<div class="q">Is it really privacy-first? <span class="arrow">▼</span></div>
+<div class="a">Yes. All data stays in your browser's localStorage. Nothing is sent to our servers. The only network requests are DNS/WHOIS lookups you explicitly trigger in the IP Network tool.</div>
+</div>
+<div class="faq-item" onclick="this.classList.toggle('open')">
+<div class="q">Can I use the tools without an account? <span class="arrow">▼</span></div>
+<div class="a">Absolutely. The Free tier requires no signup. All 11 tools work at full functionality. Pro and Team only add save/export/sharing features.</div>
+</div>
+<div class="faq-item" onclick="this.classList.toggle('open')">
+<div class="q">What's the difference between Pro and Team? <span class="arrow">▼</span></div>
+<div class="a">Pro gives you up to 10 saved scenarios per tool and export capabilities. Team adds unlimited saves, shared collections, and 5 seats for your team.</div>
+</div>
+<div class="faq-item" onclick="this.classList.toggle('open')">
+<div class="q">Can I try Pro before subscribing? <span class="arrow">▼</span></div>
+<div class="a">Click the tier badge at the top of any tool to cycle through Free/Pro/Team and see what each unlocks. No payment info needed to explore.</div>
+</div>
+</div>
+</div>
+
+<footer>
+<a href="https://frantzenterprise.github.io/devtool-suite/">DevTool Suite Hub</a> · Pricing · ⚡ Powered by Frantz Enterprise
+</footer>
+</body>
+</html>
