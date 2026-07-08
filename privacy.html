@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Privacy Policy — Frantz DevTool Suite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#282a36;--bg2:#21222c;--surface:#44475a;--text:#f8f8f2;--text2:#bd93f9;--muted:#6272a4;
+--accent:#bd93f9;--accent2:#ff79c6;--green:#50fa7b;--border:#44475a;--radius:10px;--font:'Inter',sans-serif
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7}
+.main{max-width:720px;margin:0 auto;padding:40px 16px}
+h1{font-size:1.4rem;color:var(--text2);margin-bottom:6px}
+h2{font-size:1rem;color:var(--text);margin:20px 0 6px}
+h3{font-size:.85rem;color:var(--text2);margin:14px 0 4px}
+p,li{font-size:.78rem;color:var(--text);margin-bottom:6px}
+ul{list-style:disc;padding-left:20px;margin-bottom:8px}
+li{margin-bottom:3px}
+.muted{color:var(--muted)}
+a{color:var(--accent)}
+footer{text-align:center;padding:20px;font-size:.65rem;color:var(--muted);border-top:1px solid var(--border);margin-top:24px}
+</style></head>
+<body>
+<div class="main">
+<h1>🔒 Privacy Policy</h1>
+<p class="muted">Last updated: July 8, 2026</p>
+
+<h2>Our Commitment</h2>
+<p>Frantz Enterprise ("we," "our," "us") operates the Frantz DevTool Suite (the "Service"). We are committed to protecting your privacy. This policy explains what data we collect, how we use it, and your rights.</p>
+
+<h2>Data We Collect</h2>
+<p><strong>We collect no personal data server-side.</strong> The Frantz DevTool Suite is designed with a privacy-first architecture:</p>
+<ul>
+<li><strong>No accounts required:</strong> You can use every tool without signing up or providing any personal information.</li>
+<li><strong>Local storage only:</strong> All data you create (saved palettes, prompts, cron schedules, git commands, etc.) is stored exclusively in your browser's <code>localStorage</code>. This data never leaves your device.</li>
+<li><strong>No cookies:</strong> We do not set tracking cookies, analytics cookies, or any third-party cookies.</li>
+<li><strong>No analytics:</strong> We do not use Google Analytics, server logs, or any tracking scripts.</li>
+</ul>
+
+<h2>Network Requests</h2>
+<p>The only network requests made by the Service are:</p>
+<ul>
+<li><strong>DNS Lookups</strong> (IP Network Toolkit): When you explicitly click "Lookup," a request is sent to Google DNS over HTTPS (<code>dns.google</code>) to resolve a hostname you provide.</li>
+<li><strong>WHOIS Lookups</strong> (IP Network Toolkit): When you explicitly click "Lookup," a request is sent to whois.fdnd.nl API or RDAP to retrieve domain registration information for a domain you provide.</li>
+<li><strong>Port Scanner</strong> (IP Network Toolkit): WebSocket connections are made to ports you specify on a host you specify.</li>
+<li><strong>Google Fonts</strong>: The Service loads font files from Google Fonts CDN for visual styling.</li>
+</ul>
+<p>These requests are triggered <strong>only by your explicit action</strong>. No background network activity occurs.</p>
+
+<h2>Payment Processing</h2>
+<p>When Pro or Team subscription plans are available, payment processing will be handled by Stripe. We do not receive or store your payment card information. Stripe's privacy policy applies to payment data.</p>
+
+<h2>Third-Party Services</h2>
+<p>No third-party services have access to your data. All processing is client-side within your browser.</p>
+
+<h2>Data Retention</h2>
+<p>Data stored in browser localStorage persists until you clear your browser data or uninstall the application. We have no ability to access, retrieve, or delete this data.</p>
+
+<h2>Children's Privacy</h2>
+<p>The Service is not directed at children under 13. We do not knowingly collect any information from children.</p>
+
+<h2>Your Rights</h2>
+<p>You have the right to:</p>
+<ul>
+<li>Access data stored by the Service (view your browser's localStorage)</li>
+<li>Delete all data (clear browser localStorage)</li>
+<li>Export your data (through the export features in Pro/Team tiers)</li>
+</ul>
+
+<h2>Changes to This Policy</h2>
+<p>We may update this policy. Changes will be posted on this page with an updated date.</p>
+
+<h2>Contact</h2>
+<p>For questions: <a href="mailto:privacy@frantzenterprise.com">privacy@frantzenterprise.com</a></p>
+</div>
+<footer>⚡ Powered by Frantz Enterprise</footer>
+</body>
+</html>
