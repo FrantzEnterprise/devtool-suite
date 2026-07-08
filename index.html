@@ -109,7 +109,7 @@ iframe{width:100%;height:100%;border:none;background:var(--bg)}
 <div class="welcome-message" id="welcome">
 <div class="icon">⚡</div>
 <h2>Frantz DevTool Suite</h2>
-<p>Your all-in-one developer toolbox.<br><strong>11 tools</strong> — one unified hub.</p>
+<p>Your all-in-one developer toolbox.<br><strong>23 tools</strong> — one unified hub.</p>
 <button onclick="showDrawer()" style="margin-top:12px;padding:10px 28px;border-radius:10px;border:none;font-size:.85rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);box-shadow:0 0 20px rgba(189,147,249,.3);transition:all .2s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🔧 Open a Tool</button>
 <p style="font-size:.6rem;color:var(--muted);margin-top:10px">Drag the toolbar to reposition · Resize from bottom-right</p>
 </div>
@@ -155,7 +155,8 @@ const TOOLS=[
 {id:'baseconv',icon:'🔢',name:'Base Converter',desc:'Binary, octal, decimal, hex, custom bases',url:'https://frantzenterprise.github.io/devtool-baseconv/'},
 {id:'urldecode',icon:'🔗',name:'URL Encoder/Decoder',desc:'Encode, decode, query string parser',url:'https://frantzenterprise.github.io/devtool-urldecode/'},
 {id:'csvviewer',icon:'📊',name:'CSV Viewer',desc:'Paste CSV, sort, search, export JSON',url:'https://frantzenterprise.github.io/devtool-csvviewer/'},
-{id:'textcleaner',icon:'🧹',name:'Text Cleaner',desc:'Trim, dedupe, sort, case, whitespace',url:'https://frantzenterprise.github.io/devtool-textcleaner/'}
+{id:'textcleaner',icon:'🧹',name:'Text Cleaner',desc:'Trim, dedupe, sort, case, whitespace',url:'https://frantzenterprise.github.io/devtool-textcleaner/'},
+{id:'passgen',icon:'🔑',name:'Password Generator',desc:'Strong passwords, bulk mode, history',url:'https://frantzenterprise.github.io/devtool-passgen/'}
 ]
 
 let state={
@@ -234,7 +235,7 @@ if(idx<0||idx>=state.tabs.length)return
 state.tabs.splice(idx,1)
 if(state.tabs.length===0){
 state.activeTab=null
-document.getElementById('content').innerHTML=`<div class="welcome-message" id="welcome"><div class="icon">⚡</div><h2>Frantz DevTool Suite</h2><p>Your all-in-one developer toolbox.<br><strong>11 tools</strong> — one unified hub.</p><button onclick="showDrawer()" style="margin-top:12px;padding:10px 28px;border-radius:10px;border:none;font-size:.85rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);box-shadow:0 0 20px rgba(189,147,249,.3)">🔧 Open a Tool</button><p style="font-size:.6rem;color:var(--muted);margin-top:10px">Drag the toolbar to reposition · Resize from bottom-right</p></div>`
+document.getElementById('content').innerHTML=`<div class="welcome-message" id="welcome"><div class="icon">⚡</div><h2>Frantz DevTool Suite</h2><p>Your all-in-one developer toolbox.<br><strong>23 tools</strong> — one unified hub.</p><button onclick="showDrawer()" style="margin-top:12px;padding:10px 28px;border-radius:10px;border:none;font-size:.85rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);box-shadow:0 0 20px rgba(189,147,249,.3)">🔧 Open a Tool</button><p style="font-size:.6rem;color:var(--muted);margin-top:10px">Drag the toolbar to reposition · Resize from bottom-right</p></div>`
 }else{
 state.activeTab=state.tabs[Math.min(idx,state.tabs.length-1)].id
 switchTab(state.tabs.findIndex(t=>t.id===state.activeTab))
@@ -267,7 +268,7 @@ renderTabs()
 }else if(action==='closeall'){
 state.tabs=[]
 state.activeTab=null
-document.getElementById('content').innerHTML=`<div class="welcome-message" id="welcome"><div class="icon">⚡</div><h2>Frantz DevTool Suite</h2><p>Your all-in-one developer toolbox.<br><strong>11 tools</strong> — one unified hub.</p><button onclick="showDrawer()" style="margin-top:12px;padding:10px 28px;border-radius:10px;border:none;font-size:.85rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);box-shadow:0 0 20px rgba(189,147,249,.3)">🔧 Open a Tool</button><p style="font-size:.6rem;color:var(--muted);margin-top:10px">Drag the toolbar to reposition · Resize from bottom-right</p></div>`
+document.getElementById('content').innerHTML=`<div class="welcome-message" id="welcome"><div class="icon">⚡</div><h2>Frantz DevTool Suite</h2><p>Your all-in-one developer toolbox.<br><strong>23 tools</strong> — one unified hub.</p><button onclick="showDrawer()" style="margin-top:12px;padding:10px 28px;border-radius:10px;border:none;font-size:.85rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);box-shadow:0 0 20px rgba(189,147,249,.3)">🔧 Open a Tool</button><p style="font-size:.6rem;color:var(--muted);margin-top:10px">Drag the toolbar to reposition · Resize from bottom-right</p></div>`
 saveState()
 renderTabs()
 }else if(action==='reload'){
