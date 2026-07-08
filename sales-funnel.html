@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Frantz DevTool Suite — Sales Funnel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#282a36;--bg2:#21222c;--surface:#44475a;--surface2:#383a4a;--text:#f8f8f2;--text2:#bd93f9;--muted:#6272a4;
+--accent:#bd93f9;--accent2:#ff79c6;--green:#50fa7b;--orange:#ffb86c;--red:#ff5555;--cyan:#8be9fd;--gold:#f1fa8c;
+--border:#44475a;--radius:12px;--font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--surface);border-radius:3px}
+.top-bar{position:fixed;top:0;left:0;right:0;z-index:100;height:48px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:8px}
+.top-bar .brand{font-weight:700;font-size:.8rem;display:flex;align-items:center;gap:5px}
+.top-bar .brand span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.top-bar .nav-links{margin-left:auto;display:flex;gap:6px}
+.top-bar .nav-links a{text-decoration:none;font-size:.62rem;padding:4px 10px;border-radius:6px;color:var(--muted);transition:all .2s}
+.top-bar .nav-links a:hover{color:var(--text);background:var(--surface)}
+.main{max-width:1000px;margin:0 auto;padding:64px 16px 30px}
+
+/* Hero */
+.hero{text-align:center;padding:24px 0 16px}
+.hero h1{font-size:1.7rem;margin-bottom:4px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--muted);font-size:.78rem;max-width:550px;margin:2px auto 0;line-height:1.6}
+
+/* Tool section */
+.tool-section{margin-top:10px}
+.tool-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:8px;transition:all .2s}
+.tool-card:hover{border-color:var(--accent)}
+.tool-card.open{border-color:var(--accent)}
+
+.tool-header{display:flex;align-items:center;padding:12px 14px;cursor:pointer;gap:10px;transition:background .2s}
+.tool-header:hover{background:var(--surface2)}
+.tool-header .icon{font-size:1.4rem;width:36px;text-align:center}
+.tool-header .info{flex:1;min-width:0}
+.tool-header .info .name{font-weight:700;font-size:.82rem}
+.tool-header .info .desc{font-size:.64rem;color:var(--muted)}
+.tool-header .arrow{color:var(--muted);font-size:.65rem;transition:transform .3s;flex-shrink:0}
+.tool-card.open .tool-header .arrow{transform:rotate(180deg)}
+
+.tool-body{display:none;padding:0 14px 14px;border-top:1px solid var(--border);padding-top:10px}
+.tool-card.open .tool-body{display:block}
+
+.features-list{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:8px 0}
+.features-list li{list-style:none;font-size:.62rem;color:var(--text);display:flex;align-items:center;gap:5px}
+.features-list li::before{content:'✓';color:var(--green);font-weight:700}
+
+.tool-links{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.tool-links .btn{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border-radius:7px;font-size:.6rem;font-weight:700;text-decoration:none;transition:all .2s}
+.tool-links .btn-free{background:var(--surface);color:var(--green);border:1px solid var(--border)}
+.tool-links .btn-free:hover{border-color:var(--green)}
+.tool-links .btn-pro{background:var(--surface);color:var(--accent2);border:1px solid var(--border)}
+.tool-links .btn-pro:hover{border-color:var(--accent2)}
+.tool-links .btn-team{background:var(--surface);color:var(--orange);border:1px solid var(--border)}
+.tool-links .btn-team:hover{border-color:var(--orange)}
+.tool-links .btn-open{background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg)}
+.tool-links .btn-open:hover{opacity:.85}
+.tool-links .btn span{font-size:.5rem;opacity:.7}
+
+/* Subscription summary */
+.sub-summary{margin-top:20px;text-align:center;padding:16px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius)}
+.sub-summary h3{font-size:.85rem;color:var(--text2);margin-bottom:8px}
+.sub-grid{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.sub-card{padding:10px 18px;border-radius:8px;border:1px solid var(--border);background:var(--surface);min-width:130px;text-align:center}
+.sub-card.featured{border-color:var(--accent);box-shadow:0 0 14px rgba(189,147,249,.12)}
+.sub-card .tier{font-size:.65rem;font-weight:600;margin-bottom:2px}
+.sub-card .price{font-size:1.1rem;font-weight:800}
+.sub-card .price span{font-size:.6rem;font-weight:400;color:var(--muted)}
+.sub-card .desc{font-size:.55rem;color:var(--muted);margin-top:2px}
+
+/* CTA Crossover */
+.cross-cta{text-align:center;margin-top:16px;padding:16px}
+.cross-cta p{font-size:.7rem;color:var(--muted);margin-bottom:8px}
+.cross-cta a{display:inline-flex;align-items:center;gap:4px;padding:8px 20px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);font-weight:700;font-size:.7rem;text-decoration:none}
+
+footer{text-align:center;padding:18px 12px;font-size:.6rem;color:var(--muted);border-top:1px solid var(--border);margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--accent)}
+footer span{opacity:.4}
+
+@media(max-width:600px){
+.features-list{grid-template-columns:1fr}
+.tool-header{padding:10px}
+.tool-header .icon{font-size:1.1rem;width:28px}
+.sub-grid{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+<div class="top-bar">
+<div class="brand">⚡ <span>DevTool Suite</span></div>
+<div class="nav-links">
+<a href="https://frantzenterprise.github.io/devtool-suite/">Hub</a>
+<a href="https://frantzenterprise.github.io/devtool-suite/pricing.html">Pricing</a>
+<a href="https://frantzenterprise.github.io/devtool-suite/privacy.html">Privacy</a>
+<a href="https://frantzenterprise.github.io/devtool-suite/terms.html">Terms</a>
+</div>
+</div>
+
+<div class="main">
+<div class="hero">
+<h1>Your All-in-One Developer Toolbox</h1>
+<p>11 professional tools. One subscription. Privacy-first — all data stays in your browser.</p>
+</div>
+
+<div class="tool-section" id="toolSection"></div>
+
+<!-- Subscription summary -->
+<div class="sub-summary">
+<h3>Choose Your Plan</h3>
+<div class="sub-grid">
+<div class="sub-card">
+<div class="tier">🆓 Free</div>
+<div class="price">$0 <span>/mo</span></div>
+<div class="desc">Full tool access · No signup</div>
+</div>
+<div class="sub-card featured">
+<div class="tier">⚡ Pro</div>
+<div class="price">$6 <span>/mo</span></div>
+<div class="desc">Save up to 10 · Export</div>
+</div>
+<div class="sub-card">
+<div class="tier">🏢 Team</div>
+<div class="price">$19 <span>/mo</span></div>
+<div class="desc">Unlimited · 5 seats · Sharing</div>
+</div>
+</div>
+</div>
+
+<div class="cross-cta">
+<p>All tools are also available in the unified desktop hub with draggable toolbar and browser-style tabs.</p>
+<a href="https://frantzenterprise.github.io/devtool-suite/">🚀 Launch the Hub</a>
+</div>
+</div>
+
+<footer>
+<a href="https://frantzenterprise.github.io/devtool-suite/">Hub</a> <span>·</span>
+<a href="https://frantzenterprise.github.io/devtool-suite/pricing.html">Pricing</a> <span>·</span>
+<a href="https://frantzenterprise.github.io/devtool-suite/privacy.html">Privacy</a> <span>·</span>
+<a href="https://frantzenterprise.github.io/devtool-suite/terms.html">Terms</a> <span>·</span>
+<a href="https://frantzenterprise.github.io/devtool-suite/disclaimer.html">Disclaimer</a>
+<span>·</span> ⚡ Powered by Frantz Enterprise
+</footer>
+
+<script>
+const TOOLS=[
+{
+id:'modelcompare',icon:'📊',name:'AI ModelCompare',
+desc:'Compare 48 AI models by price, context size, features, and performance.',
+features:['48 models, 7 providers','Side-by-side comparison','5 themes','Favorites & history','Search & filter'],
+url:'https://frantzenterprise.github.io/ai-model-compare/',
+free:'All features unlocked','pro':'Save up to 10 comparisons · Export results','team':'Unlimited comparisons · Share comparisons'
+},
+{
+id:'apicalc',icon:'💰',name:'API Cost Calculator',
+desc:'Estimate AI API costs. Enter token volumes, select models, see real-time projections with charts.',
+features:['Real-time cost projections','Provider comparison','Visual charts','Save scenarios','Custom parameters'],
+url:'https://frantzenterprise.github.io/devtool-apicalc/',
+free:'Full calculator','pro':'Save scenarios · Export charts','team':'Unlimited scenarios · Team sharing'
+},
+{
+id:'promptbench',icon:'🧪',name:'Prompt Bench',
+desc:'Test prompts across multiple models at once. Compare cost, tokens, and latency side-by-side.',
+features:['Multi-model testing','Token counting','Cost estimates','Latency comparison','Split view'],
+url:'https://frantzenterprise.github.io/devtool-promptbench/',
+free:'Full test bench','pro':'Save up to 10 sessions','team':'Unlimited sessions · Share results'
+},
+{
+id:'crontab',icon:'⏰',name:'Crontab Guru',
+desc:'Visual cron expression builder. See plain-English translations, next 10 fire times, countdown timer.',
+features:['Visual builder','Plain English translation','Next 10 fire times','Countdown timer','Expression library'],
+url:'https://frantzenterprise.github.io/devtool-crontabguru/',
+free:'Full builder','pro':'Save expressions · Export','team':'Unlimited saves'
+},
+{
+id:'regex',icon:'🔍',name:'Regex Builder & Tester',
+desc:'Real-time regex testing with match highlighting, quick builder, cheat sheet, and common patterns.',
+features:['Live matching & highlights','Quick builder','Cheat sheet','Common pattern library','Multi-flavor support'],
+url:'https://frantzenterprise.github.io/devtool-regexbuilder/',
+free:'Full tester','pro':'Save patterns · Export','team':'Unlimited library'
+},
+{
+id:'jwt',icon:'🔐',name:'JWT Inspector',
+desc:'Decode JWTs instantly in your browser. Inspect headers, payloads, expiration countdowns, and claims.',
+features:['Instant decode','Header & payload viewer','Expiration countdown','Claim validation','Client-side only'],
+url:'https://frantzenterprise.github.io/devtool-jwtinspector/',
+free:'Full inspector','pro':'Save tokens · Export','team':'Unlimited history'
+},
+{
+id:'palette',icon:'🎨',name:'Color Palette Studio',
+desc:'Generate color palettes from any base color. Export to CSS Variables, Tailwind, or JSON.',
+features:['5 palette modes','6 color presets','CSS Variables export','Tailwind config export','JSON export'],
+url:'https://frantzenterprise.github.io/devtool-palettestudio/',
+free:'Full palette tool','pro':'Save palettes · Export all formats','team':'Unlimited collections'
+},
+{
+id:'jsoncsv',icon:'🔄',name:'JSON ↔ CSV Transformer',
+desc:'Bidirectional transformer with nested JSON flattening, table preview, and 5 built-in presets.',
+features:['Bidirectional conversion','Nested JSON flattening','Table preview','5 presets','Auto-detect delimiter'],
+url:'https://frantzenterprise.github.io/devtool-jsoncsv/',
+free:'Full transformer','pro':'Save conversions · Export','team':'Unlimited history'
+},
+{
+id:'anim',icon:'✨',name:'Anim Studio',
+desc:'12 text animations and 8 image canvas effects with CSS/PNG export. Drag, tweak, preview.',
+features:['12 text animations','8 image canvas effects','Real-time preview','CSS export','PNG export'],
+url:'https://frantzenterprise.github.io/devtool-animstudio/',
+free:'Full studio','pro':'Save projects · Export files','team':'Unlimited projects'
+},
+{
+id:'git',icon:'🌿',name:'Git Command Builder',
+desc:'Build git commands visually across 6 categories. 25+ commands with dynamic parameter forms.',
+features:['6 command categories','25+ commands','Dynamic parameters','Favorites library','Command preview'],
+url:'https://frantzenterprise.github.io/devtool-gitbuilder/',
+free:'Full builder','pro':'Save favorites · Export','team':'Team command library'
+},
+{
+id:'ipnet',icon:'🌐',name:'IP Network Toolkit',
+desc:'Subnet calculator, DNS lookup, WHOIS lookup, and port scanner. All from your browser.',
+features:['Subnet calculator','DNS lookup (DoH)','WHOIS lookup','Port scanner','Export results'],
+url:'https://frantzenterprise.github.io/devtool-ipnet/',
+free:'Full toolkit','pro':'Save results · Export','team':'Unlimited scan history'
+}
+]
+
+function init(){
+const section=document.getElementById('toolSection')
+section.innerHTML=TOOLS.map((t,i)=>`
+<div class="tool-card${i===0?' open':''}" onclick="toggleCard(this)">
+<div class="tool-header">
+<div class="icon">${t.icon}</div>
+<div class="info">
+<div class="name">${t.name}</div>
+<div class="desc">${t.desc}</div>
+</div>
+<div class="arrow">▼</div>
+</div>
+<div class="tool-body">
+<ul class="features-list">${t.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+<div class="tool-links">
+<a href="${t.url}" class="btn btn-open" target="_blank">🚀 Open Tool</a>
+<a href="${t.url}" class="btn btn-free" target="_blank">🆓 Free</a>
+<a href="#" class="btn btn-pro" onclick="event.preventDefault();alert('⚡ Pro plan coming soon with Stripe checkout!')">⚡ Pro $6/mo <span>↑ saves</span></a>
+<a href="#" class="btn btn-team" onclick="event.preventDefault();alert('🏢 Team plan coming soon with Stripe checkout!')">🏢 Team $19/mo <span>↑ unlimited</span></a>
+</div>
+</div>
+</div>`).join('')
+}
+
+function toggleCard(el){
+el.classList.toggle('open')
+}
+
+document.addEventListener('DOMContentLoaded',init)
+</script>
+</body>
+</html>
