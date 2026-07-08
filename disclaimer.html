@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Disclaimer — Frantz DevTool Suite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#282a36;--bg2:#21222c;--surface:#44475a;--text:#f8f8f2;--text2:#bd93f9;--muted:#6272a4;
+--accent:#bd93f9;--accent2:#ff79c6;--green:#50fa7b;--border:#44475a;--radius:10px;--font:'Inter',sans-serif
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;line-height:1.7}
+.main{max-width:720px;margin:0 auto;padding:40px 16px}
+h1{font-size:1.4rem;color:var(--text2);margin-bottom:6px}
+h2{font-size:1rem;color:var(--text);margin:20px 0 6px}
+p,li{font-size:.78rem;color:var(--text);margin-bottom:6px}
+ul{list-style:disc;padding-left:20px;margin-bottom:8px}
+li{margin-bottom:3px}
+.muted{color:var(--muted)}
+a{color:var(--accent)}
+.warning{background:#ffb86c15;border:1px solid var(--orange);border-radius:8px;padding:10px 14px;margin:14px 0}
+.warning strong{color:var(--orange)}
+footer{text-align:center;padding:20px;font-size:.65rem;color:var(--muted);border-top:1px solid var(--border);margin-top:24px}
+</style></head>
+<body>
+<div class="main">
+<h1>⚠️ Legal Disclaimer</h1>
+<p class="muted">Last updated: July 8, 2026</p>
+
+<div class="warning">
+<strong>⚠️ Important:</strong> The Frantz DevTool Suite provides developer utility tools for reference, testing, and educational purposes. Outputs should not be blindly trusted in production environments.
+</div>
+
+<h2>1. No Professional Advice</h2>
+<p>The tools in this suite (including but not limited to the Git Command Builder, Regex Builder, Crontab Guru, IP Network Toolkit, and JWT Inspector) provide <strong>reference outputs only</strong>. They are not a substitute for professional judgment, thorough testing, or security review.</p>
+
+<h2>2. Output Accuracy</h2>
+<p>While we strive for correctness:</p>
+<ul>
+<li><strong>Git commands</strong> use the parameters you provide — verify command syntax before running in production repositories</li>
+<li><strong>Regex patterns</strong> are tested client-side — edge cases may differ across regex engines (PCRE, JavaScript, Python, etc.)</li>
+<li><strong>Cron expressions</strong> have many valid representations — always test schedules in a staging environment</li>
+<li><strong>JWT decoding</strong> is done client-side — never paste tokens from untrusted sources</li>
+<li><strong>Subnet calculations</strong> assume standard CIDR notation — verify against your network configuration</li>
+<li><strong>DNS/WHOIS results</strong> depend on external APIs — data may be cached or delayed</li>
+<li><strong>Port scan results</strong> may be affected by firewalls, network policies, or connectivity</li>
+</ul>
+
+<h2>3. Security</h2>
+<p>The tools are client-side and process data in your browser. However:</p>
+<ul>
+<li>No tool can protect against compromised devices or browser extensions</li>
+<li>Pasting sensitive data (API keys, tokens, passwords) into any tool carries inherent risk</li>
+<li>The JWT Inspector decodes tokens on your machine — but we recommend never pasting production tokens into any web tool</li>
+</ul>
+
+<h2>4. No Warranty</h2>
+<p>THE SERVICE IS PROVIDED "AS IS," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.</p>
+
+<h2>5. No Liability</h2>
+<p>IN NO EVENT SHALL FRANTZ ENTERPRISE BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM THE USE OF THESE TOOLS.</p>
+
+<h2>6. Ethical Use</h2>
+<p>The IP Network Toolkit's port scanner and WHOIS/DNS lookups are provided for legitimate security research and network administration only. Users are responsible for complying with all applicable laws. Scanning systems you do not own or have explicit permission to test may be illegal.</p>
+
+<h2>7. Independence</h2>
+<p>This suite is not affiliated with, endorsed by, or sponsored by any company whose APIs or services may be referenced (OpenAI, Google, GitHub, Stripe, etc.).</p>
+</div>
+<footer>⚡ Powered by Frantz Enterprise</footer>
+</body>
+</html>
