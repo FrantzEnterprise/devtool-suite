@@ -30,8 +30,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);overflow:hid
 .tab .close{margin-left:2px;font-size:.55rem;opacity:.5;cursor:pointer;border-radius:3px;padding:0 2px}
 .tab .close:hover{opacity:1;background:var(--red);color:#fff}
 .tab .label{overflow:hidden;text-overflow:ellipsis;display:inline-block;vertical-align:middle;line-height:1.2}
-.tab-add{padding:4px 8px;border-radius:6px;font-size:.7rem;cursor:pointer;color:var(--muted);background:var(--surface);border:1px solid var(--border);flex-shrink:0;line-height:1}
-.tab-add:hover{color:var(--accent);border-color:var(--accent)}
+.tab-add{display:flex;align-items:center;justify-content:center;gap:3px;padding:4px 12px;border-radius:8px;font-size:.75rem;font-weight:700;cursor:pointer;color:var(--bg);background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;flex-shrink:0;line-height:1.2;box-shadow:0 0 10px rgba(189,147,249,.3);transition:all .2s}
+.tab-add:hover{box-shadow:0 0 18px rgba(189,147,249,.6);transform:scale(1.05)}
+.tab-add .pulse{display:inline-block;animation:pulseBtn 2s ease-in-out infinite}
+@keyframes pulseBtn{0%,100%{opacity:1}50%{opacity:.5}}
+.tab-add .hotkey{font-size:.5rem;opacity:.7;font-weight:400}
 /* Context menu */
 .context-menu{position:fixed;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:4px 0;min-width:120px;z-index:2000;box-shadow:0 4px 20px rgba(0,0,0,.6);display:none}
 .context-menu .item{padding:5px 12px;font-size:.65rem;cursor:pointer;color:var(--text);display:flex;align-items:center;gap:6px}
@@ -75,7 +78,7 @@ iframe{width:100%;height:100%;border:none;background:var(--bg)}
 <div class="tb-inner">
 <span style="font-weight:700;font-size:.75rem;flex-shrink:0;display:flex;align-items:center;gap:4px">⚡<span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">DevTools</span></span>
 <div class="tabs-scroll" id="tabBar"></div>
-<button class="tab-add" onclick="showDrawer()" title="Open tool">+</button>
+<button class="tab-add" onclick="showDrawer()" title="Open tool"><span class="pulse">+</span> Tools <span class="hotkey">(11)</span></button>
 <span class="tier-badge" id="tBadge" onclick="cycleTier()">🆓 Free</span>
 </div>
 <div style="display:flex;gap:3px;align-items:center;flex-shrink:0;margin-top:2px">
@@ -92,8 +95,9 @@ iframe{width:100%;height:100%;border:none;background:var(--bg)}
 <div class="welcome-message" id="welcome">
 <div class="icon">⚡</div>
 <h2>Frantz DevTool Suite</h2>
-<p>Select a tool from the <strong>+</strong> button to get started.<br>Your tabs are saved automatically between sessions.</p>
-<p style="font-size:.65rem;color:var(--muted);margin-top:8px">Drag toolbar to reposition · Resize from bottom-right corner</p>
+<p>Your all-in-one developer toolbox.<br><strong>11 tools</strong> — one unified hub.</p>
+<button onclick="showDrawer()" style="margin-top:12px;padding:10px 28px;border-radius:10px;border:none;font-size:.85rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);box-shadow:0 0 20px rgba(189,147,249,.3);transition:all .2s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🔧 Open a Tool</button>
+<p style="font-size:.6rem;color:var(--muted);margin-top:10px">Drag the toolbar to reposition · Resize from bottom-right</p>
 </div>
 </div>
 
@@ -205,7 +209,7 @@ if(idx<0||idx>=state.tabs.length)return
 state.tabs.splice(idx,1)
 if(state.tabs.length===0){
 state.activeTab=null
-document.getElementById('content').innerHTML=`<div class="welcome-message" id="welcome"><div class="icon">⚡</div><h2>Frantz DevTool Suite</h2><p>Select a tool from the <strong>+</strong> button to get started.</p></div>`
+document.getElementById('content').innerHTML=`<div class="welcome-message" id="welcome"><div class="icon">⚡</div><h2>Frantz DevTool Suite</h2><p>Your all-in-one developer toolbox.<br><strong>11 tools</strong> — one unified hub.</p><button onclick="showDrawer()" style="margin-top:12px;padding:10px 28px;border-radius:10px;border:none;font-size:.85rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);box-shadow:0 0 20px rgba(189,147,249,.3)">🔧 Open a Tool</button><p style="font-size:.6rem;color:var(--muted);margin-top:10px">Drag the toolbar to reposition · Resize from bottom-right</p></div>`
 }else{
 state.activeTab=state.tabs[Math.min(idx,state.tabs.length-1)].id
 switchTab(state.tabs.findIndex(t=>t.id===state.activeTab))
@@ -238,7 +242,7 @@ renderTabs()
 }else if(action==='closeall'){
 state.tabs=[]
 state.activeTab=null
-document.getElementById('content').innerHTML=`<div class="welcome-message" id="welcome"><div class="icon">⚡</div><h2>Frantz DevTool Suite</h2><p>Select a tool from the <strong>+</strong> button to get started.</p></div>`
+document.getElementById('content').innerHTML=`<div class="welcome-message" id="welcome"><div class="icon">⚡</div><h2>Frantz DevTool Suite</h2><p>Your all-in-one developer toolbox.<br><strong>11 tools</strong> — one unified hub.</p><button onclick="showDrawer()" style="margin-top:12px;padding:10px 28px;border-radius:10px;border:none;font-size:.85rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);box-shadow:0 0 20px rgba(189,147,249,.3)">🔧 Open a Tool</button><p style="font-size:.6rem;color:var(--muted);margin-top:10px">Drag the toolbar to reposition · Resize from bottom-right</p></div>`
 saveState()
 renderTabs()
 }else if(action==='reload'){
