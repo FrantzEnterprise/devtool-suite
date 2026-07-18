@@ -6,132 +6,378 @@
 <title>LockCMD — Locksmith Command Center</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0d1117;--bg2:#161b22;--surface:#21262d;--surface2:#30363d;--text:#e6edf3;--text2:#58a6ff;--muted:#8b949e;--accent:#58a6ff;--accent2:#f0883e;--green:#3fb950;--orange:#d29922;--red:#f85149;--gold:#e3b341;--cyan:#79c0ff;--border:#30363d;--radius:10px;--font:'Inter','Segoe UI',system-ui,sans-serif}
+:root{--bg:#0d1117;--bg2:#161b22;--surface:#21262d;--surface2:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--accent2:#f0883e;--green:#3fb950;--orange:#d29922;--border:#30363d;--radius:10px;--font:'Inter','Segoe UI',system-ui,sans-serif}
 body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:16px;min-height:100vh}
-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:20px 16px 14px;position:sticky;top:0;z-index:100}
-.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-header h1{font-size:22px;display:flex;align-items:center;gap:8px}
-header h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-header .sub{color:var(--muted);font-size:13px;margin-top:2px;width:100%}
-header nav{display:flex;gap:8px;margin-left:auto}
-header nav a{color:var(--cyan);text-decoration:none;font-size:13px;padding:4px 10px;border-radius:4px;background:var(--surface)}
-header nav a:hover{background:var(--surface2)}
-.main{max-width:1100px;margin:0 auto;padding:20px 16px}
-.section-title{font-size:20px;color:var(--accent2);margin:24px 0 14px;display:flex;align-items:center;gap:8px}
-.section-title:first-child{margin-top:0}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all .2s;position:relative}
-.card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 20px rgba(88,166,255,.1)}
-.card .icon{font-size:28px;margin-bottom:6px}
-.card h3{font-size:15px;margin-bottom:4px}
-.card p{color:var(--muted);font-size:12px;line-height:1.4}
-.card .badge{position:absolute;top:10px;right:10px;background:var(--accent);color:var(--bg);font-size:9px;padding:2px 8px;border-radius:10px;font-weight:600}
-.card .badge.orange{background:var(--accent2)}
-.card .badge.green{background:var(--green)}
-.card .badge.purple{background:#bc8cff;color:#000}
-.hero{text-align:center;padding:40px 16px;background:linear-gradient(180deg,var(--bg2),transparent);border-radius:var(--radius);margin-bottom:20px}
-.hero h2{font-size:28px;margin-bottom:8px}
-.hero p{color:var(--muted);font-size:15px;max-width:600px;margin:0 auto 16px}
-.hero .tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.hero .tags span{background:var(--surface);padding:4px 12px;border-radius:20px;font-size:12px;color:var(--muted)}
-footer{text-align:center;padding:20px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:40px}
-footer a{color:var(--cyan);text-decoration:none}
+.top-bar{background:var(--bg2);padding:8px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.top-bar .brand{font-weight:700;font-size:14px;display:flex;align-items:center;gap:4px;flex-shrink:0}
+.top-bar .brand span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.top-bar a{color:var(--cyan);text-decoration:none;font-size:12px;padding:3px 8px;background:var(--surface);border-radius:4px;flex-shrink:0}
+.top-bar a:hover{background:var(--surface2)}
+.tab-bar{display:flex;gap:2px;overflow-x:auto;padding:0 2px;background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:44px;z-index:99}
+.tab-bar .tab{padding:7px 16px;cursor:pointer;white-space:nowrap;background:transparent;color:var(--muted);font-size:13px;border-bottom:2px solid transparent;flex-shrink:0;transition:all .15s}
+.tab-bar .tab:hover{color:var(--text);background:var(--surface)}
+.tab-bar .tab.active{color:var(--accent);border-bottom-color:var(--accent);background:var(--bg)}
+.panel{display:none}
+.panel.active{display:block}
+.content{max-width:900px;margin:0 auto;padding:14px}
+h2{font-size:17px;color:var(--accent);margin-bottom:3px}
+p{color:var(--muted);font-size:13px;margin-bottom:10px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:10px}
+label{display:block;color:var(--muted);font-size:11px;margin-bottom:2px;margin-top:6px}
+label:first-child{margin-top:0}
+input,select,textarea{width:100%;background:var(--surface);color:var(--text);border:1px solid var(--border);padding:6px 8px;border-radius:5px;font-size:13px;font-family:var(--font)}
+textarea{resize:vertical;min-height:40px}
+.btn{background:var(--accent);color:var(--bg);border:none;padding:7px 16px;border-radius:5px;cursor:pointer;font-weight:600;font-size:12px;margin-top:6px}
+.btn:hover{opacity:.85}
+.btn.green{background:var(--green)}
+.result-box{background:var(--bg2);border:1px solid var(--accent);border-radius:var(--radius);padding:10px;margin-top:8px;display:none;font-size:12px;line-height:1.5;position:relative}
+.result-box.show{display:block}
+.copy-btn{background:var(--surface);color:var(--text);border:1px solid var(--border);padding:2px 7px;border-radius:3px;cursor:pointer;font-size:10px;position:absolute;top:6px;right:6px}
+.row{display:flex;gap:6px;flex-wrap:wrap}
+.row>*{flex:1;min-width:110px}
+.note{background:var(--surface);border-left:3px solid var(--orange);padding:6px 10px;font-size:11px;color:var(--muted);margin:8px 0;border-radius:0 4px 4px 0}
+.section-label{font-size:13px;color:var(--accent2);margin:10px 0 6px;font-weight:600}
 @media(max-width:600px){
-  header{padding:14px 12px 10px}
-  header h1{font-size:18px}
-  .cards{grid-template-columns:1fr}
-  .hero h2{font-size:22px}
-  .hero{padding:24px 12px}
+  .top-bar{padding:6px 10px}
+  .tab-bar .tab{padding:6px 10px;font-size:12px}
+  .content{padding:10px}
+  .row>*{min-width:100px}
 }
 </style>
 </head>
 <body>
 
-<header>
-<div class="header-inner">
-  <h1>🔧 <span>LockCMD</span></h1>
-  <div class="sub">Locksmith Command Center — dispatch, quotes, diagnostics & safe service in one place</div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="help.html">❓ Guide</a>
-  </nav>
-</div>
-</header>
-
-<div class="main">
-
-<div class="hero">
-  <h2>⚡ Everything a Locksmith Needs</h2>
-  <p>Quick-action tools for residential, commercial, automotive, and safe service. Built for the road — works on any device.</p>
-  <div class="tags">
-    <span>🏠 Resi/Comm</span>
-    <span>🚗 Automotive</span>
-    <span>🔒 Safe Service</span>
-    <span>📋 Dispatch</span>
-    <span>💰 Quotes</span>
-  </div>
+<div class="top-bar">
+  <div class="brand">🔧 <span>LockCMD</span></div>
+  <a href="help.html">❓</a>
 </div>
 
-<h2 class="section-title">🏠 Residential & Commercial</h2>
-<div class="cards">
-  <div class="card" onclick="location.href='tools/dispatch.html'" title="Start a new dispatch">
-    <div class="badge green">New</div>
-    <div class="icon">📞</div>
-    <h3>Call Triage & Dispatch</h3>
-    <p>Generate a dispatch-ready job ticket with SMS link for the customer. Lockout, rekey, install, or repair.</p>
-  </div>
-  <div class="card" onclick="location.href='tools/dispatch.html#quote'">
-    <div class="icon">💰</div>
-    <h3>Rekey Quote</h3>
-    <p>Quick parts + labor estimate for rekey and master key systems by cylinder count and brand.</p>
-  </div>
-  <div class="card" onclick="location.href='tools/dispatch.html#bid'">
-    <div class="icon">📄</div>
-    <h3>Commercial Bid Builder</h3>
-    <p>Bid multi-door jobs with panic hardware, key systems, and door counts.</p>
-  </div>
+<div class="tab-bar" id="mainTabs">
+  <div class="tab active" onclick="switchTab('resi')">🏠 Resi / Comm</div>
+  <div class="tab" onclick="switchTab('auto')">🚗 Automotive</div>
+  <div class="tab" onclick="switchTab('safe')">🔒 Safe Service</div>
 </div>
 
-<h2 class="section-title">🚗 Automotive</h2>
-<div class="cards">
-  <div class="card" onclick="location.href='tools/automotive.html'">
-    <div class="badge orange">Popular</div>
-    <div class="icon">🚙</div>
-    <h3>Car Lockout Dispatch</h3>
-    <p>Get tool recommendations + dispatch sheet by year, make, model, and lockout type.</p>
-  </div>
-  <div class="card" onclick="location.href='tools/automotive.html#fob'">
-    <div class="icon">🔑</div>
-    <h3>Key & Fob Quote</h3>
-    <p>Estimate parts + programming for transponders, fobs, smart keys, and combos.</p>
-  </div>
-  <div class="card" onclick="location.href='tools/automotive.html#ignition'">
-    <div class="icon">🔧</div>
-    <h3>Ignition Diagnostic</h3>
-    <p>Step-by-step guide for stuck keys, no-start, broken keys, and loose ignition.</p>
-  </div>
+<!-- ============= RESI / COMM ============= -->
+<div class="panel active" id="panel-resi">
+<div class="content">
+
+<div class="section-label">📞 Call Triage & Dispatch</div>
+<div class="card">
+<div class="row">
+  <div><label>Call type</label><select id="rcType"><option>Lockout</option><option>Rekey</option><option>Install</option><option>Repair</option><option>Master key system</option></select></div>
+  <div><label>Property</label><select id="rcProp"><option>Residential</option><option>Commercial</option><option>Apartment</option><option>Industrial</option></select></div>
+</div>
+<div class="row">
+  <div><label>Address / cross street</label><input type="text" id="rcAddr" placeholder="123 Main St"></div>
+  <div><label>Urgency</label><select id="rcUrgency"><option value="emergency">🚨 Emergency</option><option value="today">⏰ Today</option><option value="schedule">📅 Schedule</option></select></div>
+</div>
+<div><label>Notes</label><textarea id="rcNotes" placeholder="Deadbolt won't turn, door is open"></textarea></div>
+<button class="btn" onclick="rcTicket()">⚡ Generate Ticket</button>
+<div class="result-box" id="rcResult"></div>
 </div>
 
-<h2 class="section-title">🔒 Safe Service</h2>
-<div class="cards">
-  <div class="card" onclick="location.href='tools/safe.html'">
-    <div class="badge purple">Expert</div>
-    <div class="icon">🔐</div>
-    <h3>Safe Service Intake</h3>
-    <p>Full intake form with reference number — captures brand, age, issue, and condition.</p>
-  </div>
-  <div class="card" onclick="location.href='tools/safe.html#pricing'">
-    <div class="icon">💰</div>
-    <h3>Safe Service Pricing</h3>
-    <p>Starting estimates for opening, combo changes, dial/digital replacement, upgrades, and GSA work.</p>
-  </div>
+<div class="section-label">🔑 Rekey / Master Key Quote</div>
+<div class="card">
+<div class="row">
+  <div><label>Cylinders</label><input type="number" id="rcCyl" value="3" min="1"></div>
+  <div><label>Key type</label><select id="rcKeyType"><option>Rekey (same key)</option><option>Rekey (different)</option><option>Master key system</option></select></div>
+</div>
+<div class="row">
+  <div><label>Brand</label><select id="rcBrand"><option>Schlage</option><option>Kwikset</option><option>Yale</option><option>Medeco</option><option>Other</option></select></div>
+  <div><label>High security?</label><select id="rcHighSec"><option value="no">No</option><option value="yes">Yes</option></select></div>
+</div>
+<button class="btn" onclick="rcRekey()">💰 Generate Quote</button>
+<div class="result-box" id="rcQuoteResult"></div>
+</div>
+
+<div class="section-label">📄 Commercial Bid Builder</div>
+<div class="card">
+<div class="row">
+  <div><label>Entry doors</label><input type="number" id="rcEntry" value="2" min="0"></div>
+  <div><label>Panic hardware</label><input type="number" id="rcPanic" value="1" min="0"></div>
+</div>
+<div class="row">
+  <div><label>Storage / closet</label><input type="number" id="rcStorage" value="4" min="0"></div>
+  <div><label>Key system</label><select id="rcKeySys"><option>Grand master key</option><option>Master key</option><option>All keyed alike</option><option>All different</option></select></div>
+</div>
+<button class="btn" onclick="rcBid()">📄 Generate Bid</button>
+<div class="result-box" id="rcBidResult"></div>
 </div>
 
 </div>
+</div>
 
-<footer>
-  <p>LockCMD v1.0 — Built for locksmiths by locksmiths. <a href="help.html">❓ Help Guide</a></p>
-</footer>
+<!-- ============= AUTOMOTIVE ============= -->
+<div class="panel" id="panel-auto">
+<div class="content">
 
+<div class="section-label">🚙 Car Lockout Dispatch</div>
+<div class="card">
+<div class="row">
+  <div><label>Year</label><input type="text" id="auYear" placeholder="2020"></div>
+  <div><label>Make</label><input type="text" id="auMake" placeholder="Toyota"></div>
+  <div><label>Model</label><input type="text" id="auModel" placeholder="Camry"></div>
+</div>
+<div><label>Location</label><input type="text" id="auLoc" placeholder="456 Oak Ave, parking lot"></div>
+<div class="row">
+  <div><label>Lockout type</label><select id="auType">
+    <option>Standard — wedge & long reach</option>
+    <option>Pulled handle — requires tool</option>
+    <option>Vertical button — wedge & air wedge</option>
+    <option>Trunk / hatch</option>
+    <option>Key in ignition — running</option>
+  </select></div>
+  <div><label>Year range</label><select id="auRange">
+    <option>2010-2015</option>
+    <option>2016-2020</option>
+    <option>2021-2025</option>
+    <option>2026+</option>
+  </select></div>
+</div>
+<button class="btn" onclick="auDispatch()">🚨 Generate Dispatch</button>
+<div class="result-box" id="auDispResult"></div>
+</div>
+
+<div class="section-label">🔑 Key & Fob Quote</div>
+<div class="card">
+<div class="row">
+  <div><label>Service</label><select id="auSvc">
+    <option>Basic key cut (non-transponder)</option>
+    <option>Transponder key — program</option>
+    <option>Remote fob — program</option>
+    <option>Smart key / proximity</option>
+    <option>Key + fob combo</option>
+  </select></div>
+  <div><label>Qty</label><input type="number" id="auQty" value="2" min="1"></div>
+</div>
+<div class="row">
+  <div><label>Year</label><input type="text" id="auFY" placeholder="2022"></div>
+  <div><label>Make</label><input type="text" id="auFM" placeholder="Honda"></div>
+</div>
+<button class="btn" onclick="auFob()">💰 Generate Quote</button>
+<div class="result-box" id="auFobResult"></div>
+</div>
+
+<div class="section-label">🔧 Ignition Diagnostic</div>
+<div class="card">
+<div><label>What's happening?</label><select id="auIgn">
+  <option>Key won't turn at all</option>
+  <option>Key turns but won't start</option>
+  <option>Key stuck in ignition</option>
+  <option>Ignition switch is loose</option>
+  <option>Key broken in ignition</option>
+</select></div>
+<button class="btn" onclick="auIgnition()">🔍 Diagnose</button>
+<div class="result-box" id="auIgnResult"></div>
+</div>
+
+</div>
+</div>
+
+<!-- ============= SAFE SERVICE ============= -->
+<div class="panel" id="panel-safe">
+<div class="content">
+
+<div class="section-label">📝 Safe Service Intake</div>
+<div class="card">
+<div class="row">
+  <div><label>Safe type</label><select id="sfType">
+    <option>Home / gun safe</option>
+    <option>Commercial / office</option>
+    <option>TL / TRTL rated</option>
+    <option>GSA container</option>
+    <option>Antique / vintage</option>
+    <option>Floor / wall safe</option>
+    <option>Jewelry / chest</option>
+  </select></div>
+  <div><label>Issue</label><select id="sfIssue">
+    <option>Won't open — locked out</option>
+    <option>Dial spins freely</option>
+    <option>Digital keypad dead</option>
+    <option>Won't lock / bolt issue</option>
+    <option>Combo forgotten</option>
+    <option>Handle loose / broken</option>
+    <option>Relocker triggered</option>
+  </select></div>
+</div>
+<div class="row">
+  <div><label>Brand</label><input type="text" id="sfBrand" placeholder="AMSEC, Gardall, Liberty..."></div>
+  <div><label>Age</label><select id="sfAge">
+    <option>New (0-5 years)</option>
+    <option>Modern (5-20 years)</option>
+    <option>Vintage (20-50 years)</option>
+    <option>Antique (50+ years)</option>
+    <option>Unknown</option>
+  </select></div>
+</div>
+<div><label>Notes</label><textarea id="sfNotes" placeholder="Sargent &amp; Greenleaf dial, serial on back"></textarea></div>
+<button class="btn" onclick="sfIntake()">📋 Generate Intake</button>
+<div class="result-box" id="sfResult"></div>
+</div>
+
+<div class="section-label">💰 Safe Service Pricing</div>
+<div class="card">
+<div><label>Service</label><select id="sfPriceSvc">
+  <option>Non-destructive opening</option>
+  <option>Destructive opening (drill/cut)</option>
+  <option>Combination change — dial</option>
+  <option>Combination change — digital</option>
+  <option>Dial replacement</option>
+  <option>Digital keypad replacement</option>
+  <option>Lock repair / service</option>
+  <option>Dial → digital upgrade</option>
+  <option>Antique restoration (assessment req.)</option>
+  <option>GSA container service</option>
+  <option>Warranty repair (mfr authorized)</option>
+  <option>Relocker reset / repair</option>
+</select></div>
+<div class="row">
+  <div><label>Access</label><select id="sfDiff">
+    <option value="easy">Easy — accessible</option>
+    <option value="moderate">Moderate — tight space</option>
+    <option value="hard">Hard — bolted/limited</option>
+  </select></div>
+  <div><label>Class</label><select id="sfClass">
+    <option value="std">Standard residential</option>
+    <option value="comm">Commercial / TL</option>
+    <option value="gsa">GSA / high-security</option>
+  </select></div>
+</div>
+<button class="btn" onclick="sfPrice()">💰 Estimate</button>
+<div class="result-box" id="sfPriceResult"></div>
+</div>
+
+<div class="note">
+  <strong>Full-service safe specialist:</strong> On-site opening, repairs, combo changes, dial & digital replacement, upgrades, GSA containers, warranty repairs. Antique & modern — all makes, all models.
+</div>
+
+</div>
+</div>
+
+<script>
+function switchTab(id){
+  document.querySelectorAll('#mainTabs .tab').forEach(t=>t.classList.remove('active'))
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'))
+  document.querySelector('#mainTabs .tab[onclick*="'+id+'"]').classList.add('active')
+  document.getElementById('panel-'+id).classList.add('active')
+  history.replaceState(null,'','#'+id)
+}
+
+function show(id,html){
+  var el=document.getElementById(id)
+  el.innerHTML=html
+  el.classList.add('show')
+}
+
+function copy(id){
+  navigator.clipboard.writeText(document.getElementById(id).innerText)
+}
+
+// ---- RESI ----
+function rcTicket(){
+  var t=document.getElementById('rcType').value
+  var p=document.getElementById('rcProp').value
+  var a=document.getElementById('rcAddr').value||'[Address]'
+  var u=document.getElementById('rcUrgency').value
+  var n=document.getElementById('rcNotes').value||'None'
+  var ul={emergency:'🚨 EMERGENCY',today:'⏰ Today',schedule:'📅 Scheduled'}
+  var ref='DSP-'+Date.now().toString(36).toUpperCase()
+  show('rcResult',
+    '<strong>📋 '+ref+'</strong><br><br>Type: '+t+' ('+p+')<br>Address: '+a+'<br>Urgency: '+ul[u]+'<br>Notes: '+n+'<br><br>'+
+    '<a href="sms:&body='+encodeURIComponent(ref+' - '+t+' - '+a+' - '+ul[u])+'" style="color:var(--cyan)">📱 Send via SMS</a>')
+}
+
+function rcRekey(){
+  var c=parseInt(document.getElementById('rcCyl').value)||3
+  var k=document.getElementById('rcKeyType').value
+  var b=document.getElementById('rcBrand').value
+  var h=document.getElementById('rcHighSec').value
+  var labor=k.includes('Master')?40*c:22*c
+  var parts=k.includes('Master')?7*c:4*c
+  if(h==='yes'){parts*=2;labor+=15*c}
+  show('rcQuoteResult','<strong>💰 Rekey Quote</strong><br><br>Cylinders: '+c+' ('+b+(h==='yes'?' HS':'')+')<br>Parts: $'+parts+'<br>Labor: $'+labor+'<br><strong style="color:var(--green);font-size:15px">Total: $'+(parts+labor)+'</strong>')
+}
+
+function rcBid(){
+  var e=parseInt(document.getElementById('rcEntry').value)||2
+  var pn=parseInt(document.getElementById('rcPanic').value)||1
+  var s=parseInt(document.getElementById('rcStorage').value)||4
+  var k=document.getElementById('rcKeySys').value
+  var td=e+pn+s
+  var parts=td*10+pn*40
+  var labor=td*30+pn*50
+  show('rcBidResult','<strong>📄 Commercial Bid</strong><br><br>Entry: '+e+' | Panic: '+pn+' | Storage: '+s+'<br>Key system: '+k+' | Total cylinders: '+td+'<br>Parts: $'+parts+'<br>Labor: $'+labor+'<br><strong style="color:var(--green);font-size:15px">Total: $'+(parts+labor)+'</strong><br><span style="font-size:10px;color:var(--muted)">Excludes access control, wiring, after-hours surcharges.</span>')
+}
+
+// ---- AUTO ----
+function auDispatch(){
+  var yr=document.getElementById('auYear').value||'[Year]'
+  var mk=document.getElementById('auMake').value||'[Make]'
+  var mo=document.getElementById('auModel').value||'[Model]'
+  var loc=document.getElementById('auLoc').value||'[Location]'
+  var lt=document.getElementById('auType').value
+  show('auDispResult',
+    '<strong>🚨 Dispatch — '+yr+' '+mk+' '+mo+'</strong><br><br>Location: '+loc+'<br>Type: '+lt+'<br>Logged: '+new Date().toLocaleString()+'<br><br>'+
+    '<strong style="color:var(--orange)">Tools:</strong> Wedge set, Long reach, Air wedge, Light set<br><br>'+
+    '<a href="sms:&body='+encodeURIComponent('Dispatch: '+yr+' '+mk+' '+mo+' at '+loc+'. Type: '+lt)+'" style="color:var(--cyan)">📱 Send SMS</a>')
+}
+
+function auFob(){
+  var svc=document.getElementById('auSvc').value
+  var qty=parseInt(document.getElementById('auQty').value)||2
+  var yr=document.getElementById('auFY').value||'[Year]'
+  var mk=document.getElementById('auFM').value||'[Make]'
+  var prices={0:15,1:65,2:75,3:120,4:85}
+  var si=['Basic key cut (non-transponder)','Transponder key — program','Remote fob — program','Smart key / proximity','Key + fob combo'].indexOf(svc)
+  var u=si>=0?prices[si]||60:60
+  show('auFobResult','<strong>💰 Quote — '+yr+' '+mk+'</strong><br><br>Service: '+svc+'<br>Qty: '+qty+'<br>Each: $'+u+'<br><strong style="color:var(--green);font-size:15px">Total: $'+(u*qty)+'</strong><br><span style="font-size:10px;color:var(--muted)">Includes programming. On-site fee may apply.</span>')
+}
+
+function auIgnition(){
+  var issue=document.getElementById('auIgn').value
+  var g={
+    "Key won't turn at all":'<strong>🔍 Causes:</strong> Worn key, seized cylinder, steering lock<br><strong>🔧 Action:</strong> Jiggle wheel, try spare. If no luck — cylinder replacement.',
+    "Key turns but won't start":'<strong>🔍 Causes:</strong> Ignition switch, transponder, battery<br><strong>🔧 Action:</strong> Check dash lights. If on/no crank — switch or transponder. Recommend diagnostic.',
+    "Key stuck in ignition":'<strong>🔍 Causes:</strong> Worn cylinder, shifter interlock, wheel tension<br><strong>🔧 Action:</strong> Try Park/Neutral, jiggle wheel. If stuck — cylinder replacement.',
+    "Ignition switch is loose":'<strong>🔍 Causes:</strong> Broken housing tabs, worn mechanism<br><strong>🔧 Action:</strong> Housing replacement. Recommend on-site.',
+    "Key broken in ignition":'<strong>🔍 Issue:</strong> Fragment stuck in cylinder<br><strong>🔧 Action:</strong> Extract fragment. If extractable — minimal cost. If not — replace cylinder.'
+  }
+  show('auIgnResult',g[issue]||'Recommend on-site diagnosis.')
+}
+
+// ---- SAFE ----
+function sfIntake(){
+  var st=document.getElementById('sfType').value
+  var si=document.getElementById('sfIssue').value
+  var sb=document.getElementById('sfBrand').value||'Unknown'
+  var sa=document.getElementById('sfAge').value
+  var sn=document.getElementById('sfNotes').value||'None'
+  var ref='SAFE-'+Date.now().toString(36).toUpperCase()
+  show('sfResult','<strong>🔒 Safe Intake — '+ref+'</strong><br><br>Type: '+st+'<br>Issue: '+si+'<br>Brand: '+sb+'<br>Age: '+sa+'<br>Notes: '+sn+'<br><br><span style="font-size:11px;color:var(--muted)">✅ Saved. Give this ref to the customer.</span>')
+}
+
+function sfPrice(){
+  var svc=document.getElementById('sfPriceSvc').value
+  var diff=document.getElementById('sfDiff').value
+  var cls=document.getElementById('sfClass').value
+  var base=[250,450,150,120,300,200,200,350,500,400,150,200]
+  var si=['Non-destructive opening','Destructive opening (drill/cut)','Combination change — dial',
+    'Combination change — digital','Dial replacement','Digital keypad replacement',
+    'Lock repair / service','Dial → digital upgrade','Antique restoration (assessment req.)',
+    'GSA container service','Warranty repair (mfr authorized)','Relocker reset / repair'].indexOf(svc)
+  var p=si>=0?base[si]||250:250
+  if(diff==='moderate')p*=1.3
+  if(diff==='hard')p*=1.6
+  if(cls==='comm')p*=1.4
+  if(cls==='gsa')p*=1.8
+  p=Math.round(p)
+  show('sfPriceResult','<strong>💰 Safe Estimate</strong><br><br>Service: '+svc+'<br>Access: '+diff+'<br>Class: '+cls+'<br><strong style="color:var(--green);font-size:17px">Starting at: $'+p+'</strong><br><span style="font-size:10px;color:var(--muted)">Varies by brand, era, mechanism. Contact for exact quote.</span>')
+}
+
+// Hash nav on load
+var h=location.hash.replace('#','')
+if(h&&document.getElementById('panel-'+h))switchTab(h)
+</script>
 </body>
 </html>
