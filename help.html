@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes">
+<title>Help — Frantz DevTool Suite</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#282a36;--bg2:#21222c;--surface:#44475a;--text:#f8f8f2;--text2:#bd93f9;--muted:#6272a4;--accent:#bd93f9;--green:#50fa7b;--orange:#ffb86c;--red:#ff5555;--gold:#f1fa8c;--cyan:#8be9fd}
+body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;padding:20px;max-width:800px;margin:0 auto}
+h1{font-size:28px;color:var(--accent);margin-bottom:5px}
+h2{font-size:22px;color:var(--green);margin-top:30px;margin-bottom:10px}
+h3{font-size:18px;color:var(--orange);margin-top:20px;margin-bottom:8px}
+p{margin-bottom:12px}
+ol,ul{margin-bottom:12px;padding-left:22px}
+li{margin-bottom:4px}
+code{background:var(--surface);padding:2px 6px;border-radius:4px;font-size:14px;color:var(--gold)}
+pre{background:var(--bg2);padding:12px;border-radius:8px;overflow-x:auto;margin-bottom:12px;font-size:14px;border:1px solid var(--surface)}
+a{color:var(--cyan);text-decoration:none}
+a:hover{text-decoration:underline}
+.tag{display:inline-block;background:var(--accent);color:var(--bg);padding:2px 10px;border-radius:12px;font-size:12px;font-weight:600;margin-right:6px}
+.tag.green{background:var(--green)}
+.tag.orange{background:var(--orange)}
+.tag.red{background:var(--red);color:var(--text)}
+.nav{background:var(--bg2);padding:10px 16px;border-radius:10px;margin-bottom:20px;font-size:14px}
+.nav a{margin-right:14px}
+.example-box{background:var(--bg2);border:1px solid var(--surface);border-radius:10px;padding:14px;margin-bottom:16px}
+.example-box .label{color:var(--muted);font-size:13px;margin-bottom:4px}
+.example-box .val{color:var(--text)}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="https://frantzenterprise.github.io/devtool-suite/">← Hub</a>
+  <a href="https://frantzenterprise.github.io/devtool-suite/pricing.html">Pricing</a>
+  <a href="https://frantzenterprise.github.io/devtool-suite/privacy.html">Privacy</a>
+  <a href="https://frantzenterprise.github.io/devtool-suite/terms.html">Terms</a>
+</div>
+
+<h1>🧰 Frantz DevTool Suite — Help Guide</h1>
+<p>Welcome! This guide explains every tool in the suite. Each section tells you <strong>what the tool does</strong> and <strong>how to use it</strong> with a quick example.</p>
+
+<!-- ==================== HUB ==================== -->
+<h2>🏠 The Hub</h2>
+<p>The Hub is the main menu. It lists all 24 tools as clickable cards.</p>
+<h3>How to use the Hub</h3>
+<ol>
+  <li>Open the Hub at <a href="https://frantzenterprise.github.io/devtool-suite/">frantzenterprise.github.io/devtool-suite/</a></li>
+  <li>Click any tool card to open it in the panel</li>
+  <li>Use the <strong>+ Tools</strong> button in the top bar to see the full list</li>
+  <li>Use the <strong>Hub</strong>, <strong>Pricing</strong>, <strong>Privacy</strong>, and <strong>Terms</strong> links in the footer for navigation</li>
+</ol>
+
+<!-- ==================== FLOW BUILDER ==================== -->
+<h2>🔀 Flow Builder</h2>
+<p>Chain multiple tools together to accomplish a multi-step goal. Great for repeatable workflows.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Describe what you want to do (e.g., "Create a password and encode it")</li>
+  <li>Pick a matching flow from the list</li>
+  <li>Follow each step — the Flow Builder opens the right tool for each step</li>
+  <li>Download your results as TXT, HTML, JSON, or Markdown</li>
+</ol>
+<div class="example-box">
+  <div class="label">Example goal:</div>
+  <div class="val">"Generate a strong password and convert it to base64"</div>
+  <div class="label" style="margin-top:8px">Flow steps:</div>
+  <div class="val">1. Open Password Generator → create password → 2. Open URL Encoder → encode it → 3. Download result</div>
+</div>
+
+<!-- ==================== PASSWORD GENERATOR ==================== -->
+<h2>🔑 Password Generator</h2>
+<p>Creates strong, random passwords with rules you control.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Set the password length (recommended: 16+)</li>
+  <li>Check which character types to include: uppercase, lowercase, numbers, symbols</li>
+  <li>Click <strong>Generate</strong></li>
+  <li>Copy the password or generate a batch</li>
+</ol>
+<div class="example-box">
+  <div class="label">Example:</div>
+  <div class="val">Length: 16, all types checked → <code>K7#mP9$xR2@vL5*q</code></div>
+</div>
+
+<!-- ==================== API COST CALC ==================== -->
+<h2>💰 API Cost Calculator</h2>
+<p>Estimates how much an API call costs based on tokens, model, and pricing tier.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Select the AI model (GPT-4, Claude, etc.)</li>
+  <li>Enter the number of input and output tokens</li>
+  <li>Click <strong>Calculate</strong> to see the estimated cost</li>
+</ol>
+
+<!-- ==================== PROMPT BENCH ==================== -->
+<h2>📊 Prompt Bench</h2>
+<p>Test how different prompts perform across multiple AI models side by side.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Type a prompt in the input box</li>
+  <li>Select which models to test against</li>
+  <li>Click <strong>Run Bench</strong> to see responses compared</li>
+</ol>
+
+<!-- ==================== CRONTAB GURU ==================== -->
+<h2>⏰ Crontab Guru</h2>
+<p>Build cron schedule expressions visually. Great for scheduling tasks on servers.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Click the time fields (minute, hour, day, month, weekday) to set values</li>
+  <li>Or type a cron expression directly (e.g., <code>0 9 * * 1-5</code>)</li>
+  <li>The tool shows the next 5 run times in plain English</li>
+</ol>
+<div class="example-box">
+  <div class="label">Example:</div>
+  <div class="val"><code>0 9 * * 1-5</code> = "At 9:00 AM, Monday through Friday"</div>
+</div>
+
+<!-- ==================== REGEX BUILDER ==================== -->
+<h2>🔍 Regex Builder</h2>
+<p>Build and test regular expressions with live matching.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Type a regex pattern (e.g., <code>\d{3}-\d{2}-\d{4}</code>)</li>
+  <li>Type test text below — matches highlight instantly</li>
+  <li>Use the cheat sheet reference on the side</li>
+</ol>
+
+<!-- ==================== JWT INSPECTOR ==================== -->
+<h2>🔐 JWT Inspector</h2>
+<p>Decode and inspect JSON Web Tokens without sending them to a server.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Paste a JWT token (starts with <code>eyJ</code>)</li>
+  <li>The header and payload decode automatically</li>
+  <li>Review the claims, expiration, and signature</li>
+</ol>
+
+<!-- ==================== PALETTE STUDIO ==================== -->
+<h2>🎨 Palette Studio</h2>
+<p>Create, adjust, and export color palettes.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Pick a base color or enter a hex code</li>
+  <li>Adjust hue, saturation, and lightness sliders</li>
+  <li>Copy hex, RGB, or HSL values for any color</li>
+  <li>Export the full palette</li>
+</ol>
+
+<!-- ==================== JSON/CSV TRANSFORMER ==================== -->
+<h2>📋 JSON ↔ CSV</h2>
+<p>Convert data between JSON and CSV formats.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Paste JSON or CSV data in the input box</li>
+  <li>Select the conversion direction (JSON→CSV or CSV→JSON)</li>
+  <li>Click <strong>Convert</strong></li>
+  <li>Copy or download the result</li>
+</ol>
+
+<!-- ==================== ANIM STUDIO ==================== -->
+<h2>🎬 Anim Studio</h2>
+<p>Create text and image animations with CSS keyframes — no coding needed.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Type your text or upload an image</li>
+  <li>Pick an animation style (fade, slide, bounce, flip, etc.)</li>
+  <li>Adjust speed and delay sliders</li>
+  <li>Click <strong>Play</strong> to preview</li>
+  <li>Export the animation code</li>
+</ol>
+
+<!-- ==================== GIT BUILDER ==================== -->
+<h2>🛠️ Git Command Builder</h2>
+<p>Build git commands by filling in blanks instead of memorizing flags.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Select what you want to do (commit, branch, merge, rebase, etc.)</li>
+  <li>Fill in the fields that appear</li>
+  <li>Click <strong>Build</strong> — the full git command appears</li>
+  <li>Copy and paste it into your terminal</li>
+</ol>
+<div class="example-box">
+  <div class="label">Example:</div>
+  <div class="val">Select "commit" → fill in message "Fix login bug" → <code>git commit -m "Fix login bug"</code></div>
+</div>
+
+<!-- ==================== IP NETWORK ==================== -->
+<h2>🌐 IP Network Toolkit</h2>
+<p>Calculate subnets, look up DNS, test WHOIS, and convert between IP formats.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Enter an IP address or CIDR (e.g., <code>192.168.1.0/24</code>)</li>
+  <li>Pick a tool: Subnet Calc, DNS Lookup, WHOIS, or Binary Converter</li>
+  <li>View the results</li>
+</ol>
+
+<!-- ==================== FILE TRANSFORMER ==================== -->
+<h2>📄 File Transformer</h2>
+<p>Convert Markdown to plain text, Markdown to HTML, text to ZIP, or encode to Base64.</p>
+<h3>How to use it</h3>
+<ol>
+  <li><strong>Paste</strong> your text into the box, or</li>
+  <li>Click <strong>📁 Open</strong> to pick a file from your computer</li>
+  <li>Select the conversion mode from the dropdown</li>
+  <li>Click <strong>⚡ Convert</strong></li>
+  <li>Copy or download the result</li>
+</ol>
+<div class="example-box">
+  <div class="label">Example — MD to HTML:</div>
+  <div class="val">Paste <code># Hello World</code> → select MD→HTML → Convert → <code>&lt;h1&gt;Hello World&lt;/h1&gt;</code></div>
+</div>
+
+<!-- ==================== UUID GENERATOR ==================== -->
+<h2>🆔 UUID Generator</h2>
+<p>Generate unique IDs in different versions (v1, v4, v7) and formats.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Select UUID version</li>
+  <li>Choose format (with or without dashes, uppercase/lowercase)</li>
+  <li>Click <strong>Generate</strong></li>
+  <li>Copy the result</li>
+</ol>
+<div class="example-box">
+  <div class="label">Example (UUID v4):</div>
+  <div class="val"><code>f47ac10b-58cc-4372-a567-0e02b2c3d479</code></div>
+</div>
+
+<!-- ==================== HTML/CSS MINIFIER ==================== -->
+<h2>📦 HTML/CSS Minifier</h2>
+<p>Shrinks HTML and CSS files by removing spaces, comments, and line breaks.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Paste your HTML or CSS code</li>
+  <li>Select minification options (remove comments, strip whitespace, etc.)</li>
+  <li>Click <strong>Minify</strong></li>
+  <li>Copy the smaller result</li>
+</ol>
+
+<!-- ==================== URL ENCODER ==================== -->
+<h2>🔗 URL Encoder/Decoder</h2>
+<p>Encode text for use in URLs, or decode URL-encoded strings back to readable text.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Type or paste text in the box</li>
+  <li>Click <strong>Encode</strong> to URL-safe encode it</li>
+  <li>Or paste encoded text and click <strong>Decode</strong></li>
+</ol>
+<div class="example-box">
+  <div class="label">Example — Encode:</div>
+  <div class="val"><code>hello world</code> → <code>hello%20world</code></div>
+  <div class="label" style="margin-top:8px">Example — Decode:</div>
+  <div class="val"><code>%F0%9F%90%B1</code> → <code>🐱</code></div>
+</div>
+
+<!-- ==================== CSV VIEWER ==================== -->
+<h2>📊 CSV Viewer</h2>
+<p>View, sort, search, and export CSV data in a table format.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Paste CSV data or click <strong>Open</strong> to load a file</li>
+  <li>Click column headers to sort</li>
+  <li>Use the search box to filter rows</li>
+  <li>Export as formatted CSV or JSON</li>
+</ol>
+
+<!-- ==================== TEXT CLEANER ==================== -->
+<h2>🧹 Text Cleaner</h2>
+<p>Clean up messy text — trim whitespace, remove duplicates, sort lines, fix case.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Paste your text</li>
+  <li>Select what to do: trim lines, remove duplicates, sort A-Z, uppercase, lowercase, title case</li>
+  <li>Click <strong>Clean</strong></li>
+  <li>Copy the result</li>
+</ol>
+
+<!-- ==================== HTTP STATUS CODES ==================== -->
+<h2>📡 HTTP Status Codes</h2>
+<p>Quick reference for every HTTP status code — searchable and categorized.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Browse by category (1xx, 2xx, 3xx, 4xx, 5xx)</li>
+  <li>Or type a code number or keyword in the search box</li>
+  <li>Click any code for a detailed explanation</li>
+</ol>
+
+<!-- ==================== DIFF CHECKER ==================== -->
+<h2>📋 Diff Checker</h2>
+<p>Compare two blocks of text and see what's different, side by side.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Paste the original text on the left</li>
+  <li>Paste the changed text on the right</li>
+  <li>Choose comparison mode: line, word, or character</li>
+  <li>Differences highlight in color automatically</li>
+</ol>
+
+<!-- ==================== TIMESTAMP CONVERTER ==================== -->
+<h2>⏱️ Timestamp Converter</h2>
+<p>Convert Unix timestamps to human-readable dates and vice versa.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Enter a Unix timestamp (e.g., <code>1700000000</code>) or a date</li>
+  <li>The other format converts automatically</li>
+  <li>Copy either value</li>
+</ol>
+<div class="example-box">
+  <div class="label">Example:</div>
+  <div class="val"><code>1700000000</code> → <code>2023-11-14 22:13:20 UTC</code></div>
+</div>
+
+<!-- ==================== LOREM IPSUM ==================== -->
+<h2>📝 Lorem Ipsum Generator</h2>
+<p>Generate placeholder text for designs, layouts, and mockups.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Choose how much text: paragraphs, words, or sentences</li>
+  <li>Set the count (e.g., 3 paragraphs)</li>
+  <li>Click <strong>Generate</strong></li>
+  <li>Copy the placeholder text</li>
+</ol>
+
+<!-- ==================== BASE CONVERTER ==================== -->
+<h2>🔢 Base Converter</h2>
+<p>Convert numbers between binary (base 2), octal (base 8), decimal (base 10), and hexadecimal (base 16).</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Enter a number in any base</li>
+  <li>Select the input base</li>
+  <li>Select the output base</li>
+  <li>The result appears instantly</li>
+</ol>
+<div class="example-box">
+  <div class="label">Example:</div>
+  <div class="val"><code>255</code> (decimal) → <code>FF</code> (hex) → <code>11111111</code> (binary)</div>
+</div>
+
+<!-- ==================== AI MODEL COMPARE ==================== -->
+<h2>🤖 AI Model Compare</h2>
+<p>Compare AI models by price, features, context window size, and capabilities side by side.</p>
+<h3>How to use it</h3>
+<ol>
+  <li>Browse the table of models (GPT, Claude, Gemini, etc.)</li>
+  <li>Use filters to narrow by provider, price range, or feature</li>
+  <li>Click a model for detailed specs</li>
+</ol>
+
+<p style="margin-top:40px; padding-top:20px; border-top:1px solid var(--surface); color:var(--muted); font-size:14px;">
+  Need help with something else? Contact us or check back — this guide is updated as tools improve.
+</p>
+
+</body>
+</html>
