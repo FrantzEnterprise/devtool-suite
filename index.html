@@ -90,7 +90,7 @@ iframe{width:100%;height:100%;border:none;background:var(--bg)}
 <!-- Toolbar -->
 <div id="toolbar">
 <div class="tb-inner">
-<span style="font-weight:700;font-size:.75rem;flex-shrink:0;display:flex;align-items:center;gap:4px">⚡<span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">DevTools</span><a href="help.html" style="color:var(--cyan);text-decoration:none;margin-left:6px;font-size:12px" title="Help Guide">❓</a></span>
+<span style="font-weight:700;font-size:.75rem;flex-shrink:0;display:flex;align-items:center;gap:4px">⚡<span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">DevTools</span><a href="help.html" style="color:var(--cyan);text-decoration:none;margin-left:6px;font-size:12px" title="Help Guide">❓</a><button onclick="showSettings()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;margin-left:4px;padding:0 4px" title="Settings & Cloud Sync">⚙️</button></span>
 <div class="tabs-scroll" id="tabBar"></div>
 <button class="tab-add" onclick="showDrawer()" title="Open tool"><span class="pulse">+</span> Tools <span class="hotkey">(24)</span></button>
 <span class="tier-badge" id="tBadge" onclick="cycleTier()">🆓 Free</span>
@@ -124,6 +124,55 @@ iframe{width:100%;height:100%;border:none;background:var(--bg)}
 </div>
 
 <!-- Context menu -->
+<div class="drawer-overlay" id="settingsOverlay" onclick="hideSettings()" style="display:none"></div>
+<div class="drawer" id="settingsDrawer" style="display:none;max-width:500px">
+<button class="drawer-close" onclick="hideSettings()">✕</button>
+<h3>⚙️ Settings & Cloud Sync</h3>
+<div style="padding:10px 0">
+  <h4 style="color:var(--green);font-size:14px;margin-bottom:8px">📥 Local Save / Load</h4>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">
+    <button onclick="saveLocal()" style="background:var(--surface);color:var(--text);border:1px solid var(--border);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:13px">💾 Download Config</button>
+    <button onclick="document.getElementById('loadFileInput').click()" style="background:var(--surface);color:var(--text);border:1px solid var(--border);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:13px">📂 Import Config</button>
+    <input type="file" id="loadFileInput" accept=".json" style="display:none" onchange="loadLocal(event)">
+  </div>
+  <h4 style="color:var(--cyan);font-size:14px;margin-bottom:8px">☁️ Cloud Sync (optional)</h4>
+  <p style="color:var(--muted);font-size:12px;margin-bottom:10px">Fill in your own credentials. Data stays in your browser.</p>
+  <div style="margin-bottom:10px">
+    <label style="color:var(--muted);font-size:12px;display:block;margin-bottom:3px">Provider</label>
+    <select id="cloudProvider" onchange="toggleCloudFields()" style="width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--border);padding:6px 8px;border-radius:6px;font-size:13px">
+      <option value="">— None —</option>
+      <option value="gist">GitHub Gist</option>
+      <option value="supabase">Supabase</option>
+    </select>
+  </div>
+  <div id="gistFields" style="display:none">
+    <div style="margin-bottom:8px">
+      <label style="color:var(--muted);font-size:12px;display:block;margin-bottom:3px">GitHub Token (classic, gist scope)</label>
+      <input type="password" id="gistToken" placeholder="ghp_..." style="width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--border);padding:6px 8px;border-radius:6px;font-size:13px">
+    </div>
+    <div style="margin-bottom:8px">
+      <label style="color:var(--muted);font-size:12px;display:block;margin-bottom:3px">Gist ID (blank = create new)</label>
+      <input type="text" id="gistId" placeholder="Optional" style="width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--border);padding:6px 8px;border-radius:6px;font-size:13px">
+    </div>
+  </div>
+  <div id="supabaseFields" style="display:none">
+    <div style="margin-bottom:8px">
+      <label style="color:var(--muted);font-size:12px;display:block;margin-bottom:3px">Project URL</label>
+      <input type="text" id="supabaseUrl" placeholder="https://xyz.supabase.co" style="width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--border);padding:6px 8px;border-radius:6px;font-size:13px">
+    </div>
+    <div style="margin-bottom:8px">
+      <label style="color:var(--muted);font-size:12px;display:block;margin-bottom:3px">Anon / Service Key</label>
+      <input type="password" id="supabaseKey" placeholder="eyJ..." style="width:100%;background:var(--bg2);color:var(--text);border:1px solid var(--border);padding:6px 8px;border-radius:6px;font-size:13px">
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;margin-top:12px">
+    <button onclick="saveCloudConfig()" style="background:var(--accent);color:var(--bg);border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px">💾 Save Settings</button>
+    <button onclick="syncToCloud()" style="background:var(--green);color:var(--bg);border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px">🔄 Sync Now</button>
+  </div>
+  <div id="syncStatus" style="margin-top:8px;font-size:12px;color:var(--muted)"></div>
+</div>
+</div>
+
 <div class="context-menu" id="ctxMenu">
 <div class="item" data-action="close">✕ Close</div>
 <div class="item" data-action="closeothers">✕ Close Others</div>
@@ -167,6 +216,22 @@ activeTab:localStorage.getItem('uh_active')||null,
 position:localStorage.getItem('uh_pos')||'top',
 }
 let ctxTabIdx=null
+
+// Settings & Cloud Sync
+function showSettings(){document.getElementById('settingsOverlay').style.display='block';document.getElementById('settingsDrawer').style.display='block'}
+function hideSettings(){document.getElementById('settingsOverlay').style.display='none';document.getElementById('settingsDrawer').style.display='none'}
+function toggleCloudFields(){var p=document.getElementById('cloudProvider').value;document.getElementById('gistFields').style.display=p==='gist'?'block':'none';document.getElementById('supabaseFields').style.display=p==='supabase'?'block':'none'}
+function saveLocal(){var cfg={cloud:{provider:document.getElementById('cloudProvider').value,token:document.getElementById('gistToken').value,gistId:document.getElementById('gistId').value,sbUrl:document.getElementById('supabaseUrl').value,sbKey:document.getElementById('supabaseKey').value}};var b=new Blob([JSON.stringify(cfg,null,2)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='devtool-suite-config.json';a.click()}
+function loadLocal(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var d=JSON.parse(r.result);if(d.cloud){document.getElementById('cloudProvider').value=d.cloud.provider||'';document.getElementById('gistToken').value=d.cloud.token||'';document.getElementById('gistId').value=d.cloud.gistId||'';document.getElementById('supabaseUrl').value=d.cloud.sbUrl||'';document.getElementById('supabaseKey').value=d.cloud.sbKey||'';toggleCloudFields();setStatus('✅ Config imported')}}catch(e){setStatus('❌ Invalid config file')}};r.readAsText(f)}
+function saveCloudConfig(){var cfg={provider:document.getElementById('cloudProvider').value,token:document.getElementById('gistToken').value,gistId:document.getElementById('gistId').value,sbUrl:document.getElementById('supabaseUrl').value,sbKey:document.getElementById('supabaseKey').value};localStorage.setItem('devtoolCloudConfig',JSON.stringify(cfg));setStatus('✅ Settings saved to browser')}
+function loadCloudConfig(){var d=localStorage.getItem('devtoolCloudConfig');if(d){try{var c=JSON.parse(d);document.getElementById('cloudProvider').value=c.provider||'';document.getElementById('gistToken').value=c.token||'';document.getElementById('gistId').value=c.gistId||'';document.getElementById('supabaseUrl').value=c.sbUrl||'';document.getElementById('supabaseKey').value=c.sbKey||'';toggleCloudFields()}catch(e){}}}
+function syncToCloud(){var p=document.getElementById('cloudProvider').value;if(!p){setStatus('⚠️ Select a cloud provider first');return}
+var cfg=JSON.parse(localStorage.getItem('devtoolCloudConfig')||'{}');var data=JSON.stringify({tabs:[],settings:cfg});
+if(p==='gist'){setStatus('🔄 Syncing to GitHub Gist...');var token=document.getElementById('gistToken').value;var gistId=document.getElementById('gistId').value;if(!token){setStatus('❌ GitHub token required');return}
+var h=new XMLHttpRequest();var url=gistId?'https://api.github.com/gists/'+gistId:'https://api.github.com/gists';var method=gistId?'PATCH':'POST';h.open(method,url,true);h.setRequestHeader('Authorization','token '+token);h.setRequestHeader('Content-Type','application/json');h.onload=function(){if(h.status>=200&&h.status<300){var r=JSON.parse(h.responseText);document.getElementById('gistId').value=r.id;saveCloudConfig();setStatus('✅ Synced to Gist: '+r.id)}else{setStatus('❌ Sync failed: '+h.status)}};h.send(JSON.stringify({description:'DevTool Suite config',public:false,files:{'devtool-config.json':{content:data}}}))}
+if(p==='supabase'){setStatus('⚠️ Supabase sync coming soon')}}
+function setStatus(m){document.getElementById('syncStatus').textContent=m}
+
 
 function init(){
 renderToolGrid()
@@ -408,7 +473,7 @@ document.addEventListener('click',function(e){
 if(!e.target.closest('.context-menu'))document.getElementById('ctxMenu').style.display='none'
 })
 
-document.addEventListener('DOMContentLoaded',init)
+document.addEventListener('DOMContentLoaded',function(){init();loadCloudConfig()})
 </script>
 <div class="legal-bar" id="legalBar">⚡ Powered by Frantz Enterprise <span class="sep">·</span> <a href="https://frantzenterprise.github.io/devtool-suite/help.html" target="_blank">❓ Help</a> <span class="sep">·</span> <a href="https://frantzenterprise.github.io/devtool-suite/privacy.html" target="_blank">Privacy</a> <span class="sep">·</span> <a href="https://frantzenterprise.github.io/devtool-suite/terms.html" target="_blank">Terms</a> <span class="sep">·</span> <a href="https://frantzenterprise.github.io/devtool-suite/disclaimer.html" target="_blank">Disclaimer</a></div>
 </body>
