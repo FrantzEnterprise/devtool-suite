@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes">
+<title>Locksmith Command Center</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#282a36;--bg2:#21222c;--surface:#44475a;--surface2:#383a4a;--text:#f8f8f2;--text2:#bd93f9;--muted:#6272a4;--accent:#bd93f9;--accent2:#ff79c6;--green:#50fa7b;--orange:#ffb86c;--red:#ff5555;--gold:#f1fa8c;--cyan:#8be9fd;--border:#44475a;--radius:10px;--font:'Inter',system-ui,sans-serif}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:16px;min-height:100vh}
+.top-bar{background:var(--bg2);padding:10px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.top-bar .brand{font-weight:700;font-size:14px;display:flex;align-items:center;gap:4px;flex-shrink:0}
+.top-bar .brand span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.top-bar a{color:var(--cyan);text-decoration:none;font-size:12px}
+.top-bar a:hover{text-decoration:underline}
+.tabs{display:flex;gap:2px;overflow-x:auto;padding:0 4px;flex:1}
+.tab{padding:6px 14px;border-radius:6px 6px 0 0;cursor:pointer;white-space:nowrap;background:var(--surface);color:var(--muted);font-size:12px;border:1px solid transparent;border-bottom:none;flex-shrink:0}
+.tab.active{background:var(--bg);color:var(--text);border-color:var(--border)}
+.content{max-width:900px;margin:0 auto;padding:16px;display:none}
+.content.active{display:block}
+h1{font-size:24px;color:var(--accent);margin-bottom:4px}
+h2{font-size:18px;color:var(--green);margin:16px 0 8px}
+h3{font-size:15px;color:var(--orange);margin:12px 0 6px}
+p{color:var(--muted);font-size:13px;margin-bottom:12px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:12px}
+.card h3{margin-top:0}
+label{display:block;color:var(--muted);font-size:12px;margin-bottom:3px;margin-top:8px}
+label:first-child{margin-top:0}
+input,select,textarea{width:100%;background:var(--surface);color:var(--text);border:1px solid var(--border);padding:8px 10px;border-radius:6px;font-size:14px;font-family:var(--font)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+textarea{resize:vertical;min-height:50px}
+.btn{background:var(--accent);color:var(--bg);border:none;padding:8px 18px;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px;margin-top:8px}
+.btn:hover{opacity:.85}
+.btn.green{background:var(--green)}
+.btn.orange{background:var(--orange)}
+.btn.red{background:var(--red)}
+.btn.sm{padding:4px 10px;font-size:11px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row>*{flex:1;min-width:120px}
+.result-box{background:var(--bg2);border:1px solid var(--accent);border-radius:var(--radius);padding:12px;margin-top:10px;display:none;white-space:pre-wrap;font-size:13px;line-height:1.5}
+.result-box.show{display:block}
+.copy-btn{background:var(--surface);color:var(--text);border:1px solid var(--border);padding:4px 10px;border-radius:4px;cursor:pointer;font-size:11px;float:right}
+.flow-steps{list-style:none;padding:0}
+.flow-steps li{background:var(--surface);padding:8px 12px;border-radius:6px;margin-bottom:4px;font-size:13px;display:flex;align-items:center;gap:6px}
+.flow-steps li .num{background:var(--accent);color:var(--bg);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.badge{display:inline-block;background:var(--accent2);color:var(--bg);padding:1px 8px;border-radius:10px;font-size:10px;font-weight:600}
+.badge.green{background:var(--green)}
+.badge.orange{background:var(--orange)}
+@media(max-width:600px){.top-bar .brand{font-size:12px}.content{padding:10px}.row>*{min-width:100px}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="brand">🔧 <span>LockCMD</span></div>
+  <a href="https://frantzenterprise.github.io/devtool-suite/">Hub</a>
+  <a href="https://frantzenterprise.github.io/devtool-suite/help.html">❓</a>
+  <div class="tabs" id="tabBar">
+    <div class="tab active" onclick="switchTab('resi')">🏠 Resi / Comm</div>
+    <div class="tab" onclick="switchTab('auto')">🚗 Automotive</div>
+    <div class="tab" onclick="switchTab('safe')">🔒 Safe Service</div>
+  </div>
+</div>
+
+<!-- ============ RESI / COMM ============ -->
+<div class="content active" id="tab-resi">
+<h1>🏠 Residential & Commercial</h1>
+<p>Quick-action tools for the most common resi/comm locksmith workflows.</p>
+
+<div class="card">
+<h3>📞 Call Triage Intake</h3>
+<p>Generate a dispatch-ready job ticket from a few answers.</p>
+<div class="row">
+  <div><label>Call type</label><select id="rcType"><option>Lockout</option><option>Rekey</option><option>Install</option><option>Repair</option><option>Master key system</option></select></div>
+  <div><label>Property type</label><select id="rcProp"><option>Residential</option><option>Commercial</option><option>Apartment</option><option>Industrial</option></select></div>
+</div>
+<div class="row">
+  <div><label>Address / cross street</label><input type="text" id="rcAddr" placeholder="123 Main St"></div>
+  <div><label>Urgency</label><select id="rcUrgency"><option value="emergency">🚨 Emergency — now</option><option value="today">⏰ Today</option><option value="schedule">📅 Schedule</option></select></div>
+</div>
+<div><label>Notes from caller</label><textarea id="rcNotes" placeholder="Deadbolt won't turn, door is open"></textarea></div>
+<button class="btn" onclick="genResiTicket()">⚡ Generate Ticket</button>
+<div class="result-box" id="rcResult"></div>
+</div>
+
+<div class="card">
+<h3>🔑 Rekey / Master Key Quick Quote</h3>
+<p>Estimate labor + parts for rekey or master key systems.</p>
+<div class="row">
+  <div><label>Cylinders / doors</label><input type="number" id="rcCyl" value="3" min="1"></div>
+  <div><label>Key type</label><select id="rcKeyType"><option>Rekey (same key)</option><option>Rekey (different)</option><option>Master key system</option></select></div>
+</div>
+<div class="row">
+  <div><label>Schlage / Kwikset / Other</label><select id="rcBrand"><option>Schlage</option><option>Kwikset</option><option>Yale</option><option>Medeco</option><option>Other</option></select></div>
+  <div><label>High security?</label><select id="rcHighSec"><option value="no">No</option><option value="yes">Yes</option></select></div>
+</div>
+<button class="btn" onclick="genRekeyQuote()">💰 Generate Quote</button>
+<div class="result-box" id="rcQuoteResult"></div>
+</div>
+
+<div class="card">
+<h3>📋 Commercial Bid Generator</h3>
+<p>Quick bid for multi-cylinder / multi-door commercial jobs.</p>
+<div class="row">
+  <div><label>Entry doors</label><input type="number" id="rcEntry" value="2" min="0"></div>
+  <div><label>Panic hardware</label><input type="number" id="rcPanic" value="1" min="0"></div>
+</div>
+<div class="row">
+  <div><label>Storage / closet</label><input type="number" id="rcStorage" value="4" min="0"></div>
+  <div><label>Key system</label><select id="rcKeySys"><option>Grand master key</option><option>Master key</option><option>All keyed alike</option><option>All different</option></select></div>
+</div>
+<button class="btn" onclick="genBid()">📄 Generate Bid</button>
+<div class="result-box" id="rcBidResult"></div>
+</div>
+</div>
+
+<!-- ============ AUTOMOTIVE ============ -->
+<div class="content" id="tab-auto">
+<h1>🚗 Automotive Locksmith</h1>
+<p>Quick workflows for car lockouts, key programming, and ignition service.</p>
+
+<div class="card">
+<h3>🚙 Car Lockout Dispatch</h3>
+<p>Get the right tools and a dispatch sheet in seconds.</p>
+<div class="row">
+  <div><label>Year</label><input type="text" id="autoYear" placeholder="2020"></div>
+  <div><label>Make</label><input type="text" id="autoMake" placeholder="Toyota"></div>
+  <div><label>Model</label><input type="text" id="autoModel" placeholder="Camry"></div>
+</div>
+<div><label>Location</label><input type="text" id="autoLoc" placeholder="Shopping center parking, 456 Oak Ave"></div>
+<div class="row">
+  <div><label>Lockout type</label><select id="autoType">
+    <option>Standard — wedge & long reach</option>
+    <option>Pulled handle — requires tool</option>
+    <option>Vertical button — wedge & air wedge</option>
+    <option>Trunk / hatch</option>
+    <option>Key in ignition — running</option>
+  </select></div>
+  <div><label>Year range present</label><select id="autoRange">
+    <option>2010-2015</option>
+    <option>2016-2020</option>
+    <option>2021-2025</option>
+    <option>2026+</option>
+  </select></div>
+</div>
+<button class="btn" onclick="genAutoDispatch()">🚨 Generate Dispatch</button>
+<div class="result-box" id="autoDispatchResult"></div>
+</div>
+
+<div class="card">
+<h3>🔑 Key & Fob Replacement Quote</h3>
+<p>Estimate parts + labor for lost keys, fobs, and transponders.</p>
+<div class="row">
+  <div><label>Service</label><select id="autoService">
+    <option>Basic key cut (non-transponder)</option>
+    <option>Transponder key — program</option>
+    <option>Remote fob — program</option>
+    <option>Smart key / proximity</option>
+    <option>Key + fob combo</option>
+  </select></div>
+  <div><label>Keys needed</label><input type="number" id="autoQty" value="2" min="1"></div>
+</div>
+<div class="row">
+  <div><label>Year</label><input type="text" id="autoFY" placeholder="2022"></div>
+  <div><label>Make</label><input type="text" id="autoFM" placeholder="Honda"></div>
+</div>
+<button class="btn" onclick="genFobQuote()">💰 Generate Quote</button>
+<div class="result-box" id="autoFobResult"></div>
+</div>
+
+<div class="card">
+<h3>🔧 Ignition Service Guide</h3>
+<p>Diagnose ignition issues and get the right repair path.</p>
+<div><label>What's happening?</label><select id="autoIgn">
+  <option>Key won't turn at all</option>
+  <option>Key turns but won't start</option>
+  <option>Key stuck in ignition</option>
+  <option>Ignition switch is loose</option>
+  <option>Key broken in ignition</option>
+</select></div>
+<button class="btn" onclick="genIgnitionGuide()">🔍 Diagnose</button>
+<div class="result-box" id="autoIgnResult"></div>
+</div>
+</div>
+
+<!-- ============ SAFE SERVICE ============ -->
+<div class="content" id="tab-safe">
+<h1>🔒 Safe Service</h1>
+<p>Intake, diagnosis, and pricing for safe work. All makes, all eras — antique to modern.</p>
+
+<div class="card">
+<h3>📝 Safe Service Intake</h3>
+<p>Collect the details needed to give an accurate assessment.</p>
+<div class="row">
+  <div><label>Safe type</label><select id="sfType">
+    <option>Home / gun safe</option>
+    <option>Commercial / office</option>
+    <option>TL / TRTL rated</option>
+    <option>GSA container</option>
+    <option>Antique / vintage</option>
+    <option>Floor / wall safe</option>
+    <option>Jewelry / chest</option>
+  </select></div>
+  <div><label>Issue</label><select id="sfIssue">
+    <option>Won't open — locked out</option>
+    <option>Dial spins freely</option>
+    <option>Digital keypad dead</option>
+    <option>Won't lock / bolt issue</option>
+    <option>Combo forgotten</option>
+    <option>Handle loose / broken</option>
+    <option>Relocker triggered</option>
+  </select></div>
+</div>
+<div class="row">
+  <div><label>Brand (if known)</label><input type="text" id="sfBrand" placeholder="AMSEC, Gardall, Liberty, etc."></div>
+  <div><label>Approx age</label><select id="sfAge">
+    <option>New (0-5 years)</option>
+    <option>Modern (5-20 years)</option>
+    <option>Vintage (20-50 years)</option>
+    <option>Antique (50+ years)</option>
+    <option>Unknown</option>
+  </select></div>
+</div>
+<div><label>Notes (model #, serial, photos available, location)</label><textarea id="sfNotes" placeholder="Sargent &amp; Greenleaf dial model, serial on back"></textarea></div>
+<button class="btn" onclick="genSafeTicket()">📋 Generate Intake</button>
+<div class="result-box" id="sfResult"></div>
+</div>
+
+<div class="card">
+<h3>💰 Safe Service Quick Pricing</h3>
+<p>Starting estimates based on service type. Final quote varies by brand, era, and condition.</p>
+<div><label>Service needed</label><select id="sfPriceService">
+  <option>Non-destructive opening</option>
+  <option>Destructive opening (drill/cut)</option>
+  <option>Combination change — dial</option>
+  <option>Combination change — digital</option>
+  <option>Dial replacement</option>
+  <option>Digital keypad replacement</option>
+  <option>Lock repair / service</option>
+  <option>Dial → digital upgrade</option>
+  <option>Antique restoration (assessment req.)</option>
+  <option>GSA container service</option>
+  <option>Warranty repair (mfr authorized)</option>
+  <option>Relocker reset / repair</option>
+</select></div>
+<div class="row">
+  <div><label>Difficulty / access</label><select id="sfDifficulty">
+    <option value="easy">Easy — accessible, standard</option>
+    <option value="moderate">Moderate — tight space</option>
+    <option value="hard">Hard — bolted down, limited access</option>
+  </select></div>
+  <div><label>Safe class</label><select id="sfClass">
+    <option value="std">Standard residential</option>
+    <option value="comm">Commercial / TL rated</option>
+    <option value="gsa">GSA / high-security</option>
+  </select></div>
+</div>
+<button class="btn" onclick="genSafePrice()">💰 Estimate</button>
+<div class="result-box" id="sfPriceResult"></div>
+</div>
+</div>
+
+<script>
+function switchTab(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'))
+  document.querySelectorAll('.content').forEach(c=>c.classList.remove('active'))
+  event.target.classList.add('active')
+  document.getElementById('tab-'+id).classList.add('active')
+}
+
+function show(id, html){
+  var el=document.getElementById(id);el.innerHTML=html;el.classList.add('show')
+}
+
+// ==================== RESI / COMM ====================
+function genResiTicket(){
+  var type=document.getElementById('rcType').value
+  var prop=document.getElementById('rcProp').value
+  var addr=document.getElementById('rcAddr').value||'[Address needed]'
+  var urg=document.getElementById('rcUrgency').value
+  var notes=document.getElementById('rcNotes').value||'None'
+  var urgLabel=urg==='emergency'?'🚨 EMERGENCY':urg==='today'?'⏰ Today':'📅 Scheduled'
+  var now=new Date()
+  var ticket='#TICKET-'+now.getTime().toString(36).toUpperCase()
+  show('rcResult',
+    '<button class="copy-btn" onclick="navigator.clipboard.writeText(parentNode.nextSibling.innerText)">📋 Copy</button>'+
+    '<strong>📋 '+ticket+'</strong><br><br>'+
+    '<strong>Type:</strong> '+type+' ('+prop+')<br>'+
+    '<strong>Address:</strong> '+addr+'<br>'+
+    '<strong>Urgency:</strong> '+urgLabel+'<br>'+
+    '<strong>Notes:</strong> '+notes+'<br><br>'+
+    '<a href="sms:&body='+encodeURIComponent(ticket+' - '+type+' - '+addr+' - '+urgLabel+' - '+notes)+'" '+
+    'style="color:var(--cyan);font-size:13px">📱 Send via SMS</a>')
+}
+
+function genRekeyQuote(){
+  var cyl=parseInt(document.getElementById('rcCyl').value)||3
+  var kt=document.getElementById('rcKeyType').value
+  var br=document.getElementById('rcBrand').value
+  var hs=document.getElementById('rcHighSec').value
+  var labor=kt.includes('Master')?45*cyl:25*cyl
+  var parts=kt.includes('Master')?8*cyl:5*cyl
+  if(hs==='yes'){parts*=2;labor+=20*cyl}
+  var total=labor+parts
+  show('rcQuoteResult',
+    '<strong>💰 Rekey Quote</strong><br><br>'+
+    '<strong>Service:</strong> '+kt+'<br>'+
+    '<strong>Cylinders:</strong> '+cyl+' ('+br+(hs==='yes'?' high sec':'')+')<br>'+
+    '<strong>Parts:</strong> $'+parts.toFixed(2)+'<br>'+
+    '<strong>Labor:</strong> $'+labor.toFixed(2)+'<br>'+
+    '<strong style="color:var(--green);font-size:16px">Total: $'+total.toFixed(2)+'</strong>')
+}
+
+function genBid(){
+  var entry=parseInt(document.getElementById('rcEntry').value)||2
+  var panic=parseInt(document.getElementById('rcPanic').value)||1
+  var stor=parseInt(document.getElementById('rcStorage').value)||4
+  var ks=document.getElementById('rcKeySys').value
+  var totalDoors=entry+panic+stor
+  var parts=totalDoors*12+panic*45
+  var labor=totalDoors*35+panic*55
+  var total=parts+labor
+  show('rcBidResult',
+    '<strong>📄 Commercial Bid</strong><br><br>'+
+    '<strong>Entry doors:</strong> '+entry+'<br>'+
+    '<strong>Panic hardware:</strong> '+panic+'<br>'+
+    '<strong>Storage/closet:</strong> '+stor+'<br>'+
+    '<strong>Key system:</strong> '+ks+'<br>'+
+    '<strong>Total cylinders:</strong> '+totalDoors+'<br>'+
+    '<strong>Parts:</strong> $'+parts.toFixed(2)+'<br>'+
+    '<strong>Labor:</strong> $'+labor.toFixed(2)+'<br>'+
+    '<strong style="color:var(--green);font-size:16px">Bid Total: $'+total.toFixed(2)+'</strong><br><br>'+
+    '<span style="font-size:11px;color:var(--muted)">Does not include access control, wiring, or after-hours surcharges.</span>')
+}
+
+// ==================== AUTOMOTIVE ====================
+function genAutoDispatch(){
+  var yr=document.getElementById('autoYear').value||'[Year]'
+  var mk=document.getElementById('autoMake').value||'[Make]'
+  var mo=document.getElementById('autoModel').value||'[Model]'
+  var loc=document.getElementById('autoLoc').value||'[Location]'
+  var lt=document.getElementById('autoType').value
+  var time=new Date().toLocaleString()
+  show('autoDispatchResult',
+    '<strong>🚨 Dispatch — '+yr+' '+mk+' '+mo+'</strong><br><br>'+
+    '<strong>Location:</strong> '+loc+'<br>'+
+    '<strong>Lockout type:</strong> '+lt+'<br>'+
+    '<strong>Logged:</strong> '+time+'<br><br>'+
+    '<strong style="color:var(--orange)">Suggested tools:</strong><br>'+
+    '• Wedge set<br>• Long reach tool<br>• Air wedge<br>• Light set<br><br>'+
+    '<a href="sms:&body='+encodeURIComponent('Dispatch: '+yr+' '+mk+' '+mo+' at '+loc+'. Type: '+lt)+'" '+
+    'style="color:var(--cyan);font-size:13px">📱 Send dispatch SMS</a>')
+}
+
+function genFobQuote(){
+  var svc=document.getElementById('autoService').value
+  var qty=parseInt(document.getElementById('autoQty').value)||2
+  var yr=document.getElementById('autoFY').value||'[Year]'
+  var mk=document.getElementById('autoFM').value||'[Make]'
+  var prices={0:15,1:65,2:75,3:120,4:85}
+  var svcIdx=['Basic key cut (non-transponder)','Transponder key — program','Remote fob — program','Smart key / proximity','Key + fob combo'].indexOf(svc)
+  var unit=svcIdx>=0?prices[svcIdx]||60:60
+  var total=unit*qty
+  show('autoFobResult',
+    '<strong>💰 Key/Fob Quote — '+yr+' '+mk+'</strong><br><br>'+
+    '<strong>Service:</strong> '+svc+'<br>'+
+    '<strong>Quantity:</strong> '+qty+'<br>'+
+    '<strong>Per unit:</strong> $'+unit.toFixed(2)+'<br>'+
+    '<strong style="color:var(--green);font-size:16px">Total: $'+total.toFixed(2)+'</strong><br>'+
+    '<span style="font-size:11px;color:var(--muted)">Includes programming labor. On-site fee may apply.</span>')
+}
+
+function genIgnitionGuide(){
+  var issue=document.getElementById('autoIgn').value
+  var guide={
+    "Key won't turn at all":'<strong>🔍 Likely causes:</strong><br>• Worn key / wrong key<br>• Lock cylinder seized<br>• Steering wheel lock engaged<br><br><strong>🔧 Action:</strong> Try jiggling wheel, try spare key. If no luck — ignition lock cylinder likely needs replacement. Recommend on-site diagnosis.',
+    "Key turns but won't start":'<strong>🔍 Likely causes:</strong><br>• Ignition switch electrical failure<br>• Transponder chip not reading<br>• Steering column electrical issue<br><br><strong>🔧 Action:</strong> Check if dash lights come on. If no dash — battery/electrical. If dash on but no crank — likely ignition switch or transponder. Recommend diagnostic scan.',
+    "Key stuck in ignition":'<strong>🔍 Likely causes:</strong><br>• Worn lock cylinder<br>• Shifter interlock issue (automatic)<br>• Steering wheel tension<br><br><strong>🔧 Action:</strong> Do not force. Try shifting to Park/Neutral, jiggle wheel. If still stuck — cylinder likely needs replacement. Can be done on-site.',
+    "Ignition switch is loose":'<strong>🔍 Likely causes:</strong><br>• Broken housing tabs<br>• Worn ignition switch mechanism<br>• Loose mounting screws<br><br><strong>🔧 Action:</strong> Usually requires housing replacement. Can be done on-site. Recommend inspection.',
+    "Key broken in ignition":'<strong>🔍 Issue:</strong> Key fragment stuck in lock cylinder<br><br><strong>🔧 Action:</strong> Extract broken key fragment. If extractable — minimal cost. If not — cylinder replacement. Do not attempt to start vehicle. Recommend on-site service.'
+  }
+  show('autoIgnResult',guide[issue]||'<strong>Recommend on-site diagnosis for accurate assessment.</strong>')
+}
+
+// ==================== SAFE ====================
+function genSafeTicket(){
+  var st=document.getElementById('sfType').value
+  var si=document.getElementById('sfIssue').value
+  var sb=document.getElementById('sfBrand').value||'Unknown'
+  var sa=document.getElementById('sfAge').value
+  var sn=document.getElementById('sfNotes').value||'None'
+  var now=new Date()
+  var ref='SAFE-'+now.getTime().toString(36).toUpperCase()
+  show('sfResult',
+    '<strong>🔒 Safe Service Intake — '+ref+'</strong><br><br>'+
+    '<strong>Type:</strong> '+st+'<br>'+
+    '<strong>Issue:</strong> '+si+'<br>'+
+    '<strong>Brand:</strong> '+sb+'<br>'+
+    '<strong>Age:</strong> '+sa+'<br>'+
+    '<strong>Notes:</strong> '+sn+'<br><br>'+
+    '<span style="font-size:12px;color:var(--muted)">✅ Saved. Copy this reference for the customer.</span>')
+}
+
+function genSafePrice(){
+  var svc=document.getElementById('sfPriceService').value
+  var diff=document.getElementById('sfDifficulty').value
+  var cls=document.getElementById('sfClass').value
+  var base={0:250,1:450,2:150,3:120,4:300,5:200,6:200,7:350,8:500,9:400,10:150,11:200}
+  var svcIdx=['Non-destructive opening','Destructive opening (drill/cut)',
+    'Combination change — dial','Combination change — digital',
+    'Dial replacement','Digital keypad replacement',
+    'Lock repair / service','Dial → digital upgrade',
+    'Antique restoration (assessment req.)','GSA container service',
+    'Warranty repair (mfr authorized)','Relocker reset / repair'].indexOf(svc)
+  var price=svcIdx>=0?base[svcIdx]||250:250
+  if(diff==='moderate')price*=1.3
+  if(diff==='hard')price*=1.6
+  if(cls==='comm')price*=1.4
+  if(cls==='gsa')price*=1.8
+  price=Math.round(price)
+  show('sfPriceResult',
+    '<strong>💰 Safe Service Estimate</strong><br><br>'+
+    '<strong>Service:</strong> '+svc+'<br>'+
+    '<strong>Access:</strong> '+diff+'<br>'+
+    '<strong>Safe class:</strong> '+cls+'<br>'+
+    '<strong style="color:var(--green);font-size:18px">Starting at: $'+price+'</strong><br><br>'+
+    '<span style="font-size:11px;color:var(--muted)">Final price varies by brand, era, mechanism, and on-site assessment. Contact for exact quote.</span>')
+}
+</script>
+
+</body>
+</html>
