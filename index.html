@@ -90,7 +90,7 @@ iframe{width:100%;height:100%;border:none;background:var(--bg)}
 <!-- Toolbar -->
 <div id="toolbar">
 <div class="tb-inner">
-<span style="font-weight:700;font-size:.75rem;flex-shrink:0;display:flex;align-items:center;gap:4px">⚡<span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">DevTools</span></span>
+<span style="font-weight:700;font-size:.75rem;flex-shrink:0;display:flex;align-items:center;gap:4px">⚡<span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">DevTools</span><a href="help.html" style="color:var(--cyan);text-decoration:none;margin-left:6px;font-size:12px" title="Help Guide">❓</a></span>
 <div class="tabs-scroll" id="tabBar"></div>
 <button class="tab-add" onclick="showDrawer()" title="Open tool"><span class="pulse">+</span> Tools <span class="hotkey">(24)</span></button>
 <span class="tier-badge" id="tBadge" onclick="cycleTier()">🆓 Free</span>
@@ -410,6 +410,6 @@ if(!e.target.closest('.context-menu'))document.getElementById('ctxMenu').style.d
 
 document.addEventListener('DOMContentLoaded',init)
 </script>
-<div class="legal-bar" id="legalBar">⚡ Powered by Frantz Enterprise <span class="sep">·</span> <a href="https://frantzenterprise.github.io/devtool-suite/privacy.html" target="_blank">Privacy</a> <span class="sep">·</span> <a href="https://frantzenterprise.github.io/devtool-suite/terms.html" target="_blank">Terms</a> <span class="sep">·</span> <a href="https://frantzenterprise.github.io/devtool-suite/disclaimer.html" target="_blank">Disclaimer</a></div>
+<div class="legal-bar" id="legalBar">⚡ Powered by Frantz Enterprise <span class="sep">·</span> <a href="https://frantzenterprise.github.io/devtool-suite/help.html" target="_blank">❓ Help</a> <span class="sep">·</span> <a href="https://frantzenterprise.github.io/devtool-suite/privacy.html" target="_blank">Privacy</a> <span class="sep">·</span> <a href="https://frantzenterprise.github.io/devtool-suite/terms.html" target="_blank">Terms</a> <span class="sep">·</span> <a href="https://frantzenterprise.github.io/devtool-suite/disclaimer.html" target="_blank">Disclaimer</a></div>
 </body>
 </html>
