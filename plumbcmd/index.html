@@ -6,7 +6,7 @@
 <title>PlumbCMD — Plumbing Service Intake</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0c1a2e;--bg2:#0f2640;--surface:#1a3a5a;--surface2:#2a4a6a;--text:#e6edf3;--muted:#8b949e;--accent:#3b82f6;--accent2:#f59e0b;--green:#3fb950;--orange:#d29922;--border:#2a4a6a;--radius:12px;--font:'Inter','Segoe UI',system-ui,sans-serif}
+:root{--bg:#082f2e;--bg2:#0f2640;--surface:#1a3a5a;--surface2:#2a4a6a;--text:#e6edf3;--muted:#8b949e;--accent:#0891b2;--accent2:#65a30d;--green:#3fb950;--orange:#d29922;--border:#2a4a6a;--radius:12px;--font:'Inter','Segoe UI',system-ui,sans-serif}
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh}
 .top{background:var(--bg2);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
 .top .brand{font-weight:700;font-size:15px;display:flex;align-items:center;gap:5px;flex-shrink:0}
@@ -208,11 +208,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     <h2>Brand Colors</h2>
     <p>Match PlumbCMD to your branding.</p>
     <label>Accent color</label>
-    <div class="color-row"><input type="color" id="setupAccent" value="#3b82f6"><input type="text" id="setupAccentTxt" placeholder="#3b82f6" oninput="document.getElementById('setupAccent').value=this.value"></div>
+    <div class="color-row"><input type="color" id="setupAccent" value="#0891b2"><input type="text" id="setupAccentTxt" placeholder="#0891b2" oninput="document.getElementById('setupAccent').value=this.value"></div>
     <label>Secondary accent</label>
-    <div class="color-row"><input type="color" id="setupAccent2" value="#f59e0b"><input type="text" id="setupAccent2Txt" placeholder="#f59e0b" oninput="document.getElementById('setupAccent2').value=this.value"></div>
+    <div class="color-row"><input type="color" id="setupAccent2" value="#65a30d"><input type="text" id="setupAccent2Txt" placeholder="#65a30d" oninput="document.getElementById('setupAccent2').value=this.value"></div>
     <label>Background</label>
-    <div class="color-row"><input type="color" id="setupBg" value="#0c1a2e"><input type="text" id="setupBgTxt" placeholder="#0c1a2e" oninput="document.getElementById('setupBg').value=this.value"></div>
+    <div class="color-row"><input type="color" id="setupBg" value="#082f2e"><input type="text" id="setupBgTxt" placeholder="#082f2e" oninput="document.getElementById('setupBg').value=this.value"></div>
     <button class="nav-btn" onclick="setupNext(5)">Next -></button>
     <button class="nav-btn secondary" onclick="setupPrev(3)"><- Back</button>
   </div>
@@ -269,11 +269,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 <label>Your email</label><input type="text" id="setEmail" placeholder="you@plumbing.com">
 <div class="section-title">Branding</div>
 <label>Accent color</label>
-<div class="color-row"><input type="color" id="setAccent" value="#3b82f6"><input type="text" id="setAccentTxt" placeholder="#3b82f6" oninput="document.getElementById('setAccent').value=this.value"></div>
+<div class="color-row"><input type="color" id="setAccent" value="#0891b2"><input type="text" id="setAccentTxt" placeholder="#0891b2" oninput="document.getElementById('setAccent').value=this.value"></div>
 <label>Secondary</label>
-<div class="color-row"><input type="color" id="setAccent2" value="#f59e0b"><input type="text" id="setAccent2Txt" placeholder="#f59e0b" oninput="document.getElementById('setAccent2').value=this.value"></div>
+<div class="color-row"><input type="color" id="setAccent2" value="#65a30d"><input type="text" id="setAccent2Txt" placeholder="#65a30d" oninput="document.getElementById('setAccent2').value=this.value"></div>
 <label>Background</label>
-<div class="color-row"><input type="color" id="setBg" value="#0c1a2e"><input type="text" id="setBgTxt" placeholder="#0c1a2e" oninput="document.getElementById('setBg').value=this.value"></div>
+<div class="color-row"><input type="color" id="setBg" value="#082f2e"><input type="text" id="setBgTxt" placeholder="#082f2e" oninput="document.getElementById('setBg').value=this.value"></div>
 <label>Background image URL</label><input type="text" id="setBgImg" placeholder="https://your-site.com/bg.jpg">
 <label>Logo URL</label><input type="text" id="setLogo" placeholder="https://your-site.com/logo.png">
 <div class="section-title">Services You Offer</div>
@@ -307,7 +307,7 @@ var defaultSettings = {
     comm:["Drain cleaning","Water heater install","Pipe repair / repipe","Backflow testing","Grease trap","New construction plumbing"],
     emerg:["Burst pipe","Sewage backup","Gas leak (suspect)","No water","Water heater failure","Flooding"]
   },
-  accent:'#3b82f6',accent2:'#f59e0b',bg:'#0c1a2e',bgImg:'',logo:'',fontSize:'16px',pinHash:''
+  accent:'#0891b2',accent2:'#65a30d',bg:'#082f2e',bgImg:'',logo:'',fontSize:'16px',pinHash:''
 };
 var settings = {};
 var drawerUnlocked = false;
