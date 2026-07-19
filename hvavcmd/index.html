@@ -6,7 +6,7 @@
 <title>HVACCMD — Heating & Cooling Service Intake</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0d1a12;--bg2:#0f2640;--surface:#1a3a5a;--surface2:#2a4a6a;--text:#e6edf3;--muted:#8b949e;--accent:#10b981;--accent2:#f97316;--green:#3fb950;--orange:#d29922;--border:#2a4a6a;--radius:12px;--font:'Inter','Segoe UI',system-ui,sans-serif}
+:root{--bg:#0d1a12;--bg2:#0f2640;--surface:#1a3a5a;--surface2:#2a4a6a;--text:#e6edf3;--muted:#8b949e;--accent:#10b981;--accent2:#ea580c;--green:#3fb950;--orange:#d29922;--border:#2a4a6a;--radius:12px;--font:'Inter','Segoe UI',system-ui,sans-serif}
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh}
 .top{background:var(--bg2);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
 .top .brand{font-weight:700;font-size:15px;display:flex;align-items:center;gap:5px;flex-shrink:0}
@@ -210,7 +210,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     <label>Accent color</label>
     <div class="color-row"><input type="color" id="setupAccent" value="#10b981"><input type="text" id="setupAccentTxt" placeholder="#10b981" oninput="document.getElementById('setupAccent').value=this.value"></div>
     <label>Secondary accent</label>
-    <div class="color-row"><input type="color" id="setupAccent2" value="#f97316"><input type="text" id="setupAccent2Txt" placeholder="#f97316" oninput="document.getElementById('setupAccent2').value=this.value"></div>
+    <div class="color-row"><input type="color" id="setupAccent2" value="#ea580c"><input type="text" id="setupAccent2Txt" placeholder="#ea580c" oninput="document.getElementById('setupAccent2').value=this.value"></div>
     <label>Background</label>
     <div class="color-row"><input type="color" id="setupBg" value="#0d1a12"><input type="text" id="setupBgTxt" placeholder="#0d1a12" oninput="document.getElementById('setupBg').value=this.value"></div>
     <button class="nav-btn" onclick="setupNext(5)">Next -></button>
@@ -271,7 +271,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 <label>Accent color</label>
 <div class="color-row"><input type="color" id="setAccent" value="#10b981"><input type="text" id="setAccentTxt" placeholder="#10b981" oninput="document.getElementById('setAccent').value=this.value"></div>
 <label>Secondary</label>
-<div class="color-row"><input type="color" id="setAccent2" value="#f97316"><input type="text" id="setAccent2Txt" placeholder="#f97316" oninput="document.getElementById('setAccent2').value=this.value"></div>
+<div class="color-row"><input type="color" id="setAccent2" value="#ea580c"><input type="text" id="setAccent2Txt" placeholder="#ea580c" oninput="document.getElementById('setAccent2').value=this.value"></div>
 <label>Background</label>
 <div class="color-row"><input type="color" id="setBg" value="#0d1a12"><input type="text" id="setBgTxt" placeholder="#0d1a12" oninput="document.getElementById('setBg').value=this.value"></div>
 <label>Background image URL</label><input type="text" id="setBgImg" placeholder="https://your-site.com/bg.jpg">
@@ -307,7 +307,7 @@ var defaultSettings = {
     comm:["Drain cleaning","Water heater install","Pipe repair / repipe","Backflow testing","Grease trap","New construction plumbing"],
     emerg:["Burst pipe","Sewage backup","Gas leak (suspect)","No water","Water heater failure","Flooding"]
   },
-  accent:'#10b981',accent2:'#f97316',bg:'#0d1a12',bgImg:'',logo:'',fontSize:'16px',pinHash:''
+  accent:'#10b981',accent2:'#ea580c',bg:'#0d1a12',bgImg:'',logo:'',fontSize:'16px',pinHash:''
 };
 var settings = {};
 var drawerUnlocked = false;
