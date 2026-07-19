@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes">
+<title>🔧 Niche Command Centers</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1117;--bg2:#161b22;--surface:#21262d;--surface2:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--accent2:#f0883e;--green:#3fb950;--orange:#d29922;--border:#30363d;--radius:12px;--font:'Inter','Segoe UI',system-ui,sans-serif}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh}
+.top{background:var(--bg2);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.top .brand{font-weight:700;font-size:15px;display:flex;align-items:center;gap:5px}
+.top .brand span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.top .tagline{font-size:11px;color:var(--muted);margin-left:auto}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 16px}
+.hero{text-align:center;padding:40px 16px 32px}
+.hero h1{font-size:32px;margin-bottom:8px}
+.hero h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--muted);font-size:16px;max-width:600px;margin:0 auto 24px;line-height:1.6}
+.tagline-lg{font-size:14px;color:var(--green);margin-bottom:6px}
+.pricing-banner{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:32px;display:flex;flex-wrap:wrap;gap:16px;justify-content:center;text-align:center}
+.pricing-banner div{padding:8px 24px}
+.pricing-banner .price{font-size:28px;font-weight:800;color:var(--accent2)}
+.pricing-banner .label{font-size:12px;color:var(--muted);margin-top:2px}
+.pricing-banner .note{font-size:12px;color:var(--muted);width:100%;border-top:1px solid var(--border);padding-top:12px;margin-top:4px}
+.section-title{font-size:20px;color:var(--accent);margin:32px 0 16px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;transition:border-color .2s}
+.card:hover{border-color:var(--accent2)}
+.card .icon{font-size:32px;margin-bottom:8px}
+.card h3{font-size:16px;margin-bottom:4px}
+.card .status{font-size:11px;display:inline-block;padding:2px 8px;border-radius:4px;margin-bottom:8px}
+.card .status.live{background:#1a3a2a;color:var(--green)}
+.card .status.coming{background:#2a2a1a;color:var(--orange)}
+.card p{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:12px;flex:1}
+.card .tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+.card .tags span{font-size:10px;background:var(--surface);padding:2px 6px;border-radius:4px;color:var(--muted)}
+.card .actions{display:flex;gap:8px}
+.card .actions a{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;transition:opacity .2s;text-align:center;flex:1}
+.card .actions .primary{background:var(--accent2);color:#000}
+.card .actions .secondary{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+.card .actions a:hover{opacity:.85}
+.specs{background:var(--surface);border-radius:var(--radius);padding:20px;margin:32px 0;font-size:13px;color:var(--muted);line-height:1.7}
+.specs strong{color:var(--text)}
+.specs ul{padding-left:18px;margin-top:8px}
+.specs ul li{margin-bottom:4px}
+@media(max-width:600px){.hero h1{font-size:24px}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="brand">🔧 <span>Niche Command Centers</span></div>
+  <div class="tagline">One-file intake apps for service businesses</div>
+</div>
+
+<div class="wrap">
+
+<div class="hero">
+  <h1><span>Your customers text you instantly.</span></h1>
+  <p class="tagline-lg">✅ No app stores · ✅ No monthly fees · ✅ No data collection</p>
+  <p>Give your customers a guided app-like experience that opens their phone's text or email pre-addressed to you with everything filled in. They tap send — you get the message. Takes 30 seconds.</p>
+</div>
+
+<div class="pricing-banner">
+  <div><div class="price">$29</div><div class="label">Single location · One-time</div></div>
+  <div><div class="price">$99</div><div class="label">Multi-location · Yearly</div></div>
+  <div><div class="price">Free</div><div class="label">Live demo — use it now</div></div>
+  <div class="note">Every app is a single HTML file. Self-hosted on GitHub Pages, your website, or shared as a link. No backend, no database, no login required for customers.</div>
+</div>
+
+<h2 class="section-title">📦 Available Now</h2>
+<div class="grid">
+
+  <!-- LockCMD -->
+  <div class="card">
+    <div class="icon">🔐</div>
+    <div class="status live">● LIVE</div>
+    <h3>LockCMD</h3>
+    <p>For locksmiths. Residential, commercial, automotive, and safe service intake flows. PIN-protected settings, per-service filtering, branding colors & logo.</p>
+    <div class="tags">
+      <span>4 service flows</span><span>PIN lock</span><span>Branding</span><span>QR ready</span>
+    </div>
+    <div class="actions">
+      <a href="https://frantzenterprise.github.io/LockCMD/" class="primary" target="_blank">Try Live ›</a>
+      <a href="https://frantzenterprise.github.io/LockCMD/help.html" class="secondary" target="_blank">Help</a>
+    </div>
+  </div>
+
+</div>
+
+<h2 class="section-title">🔄 Coming Soon</h2>
+<div class="grid">
+
+  <!-- PlumbCMD -->
+  <div class="card">
+    <div class="icon">🔧</div>
+    <div class="status coming">● BUILDING</div>
+    <h3>PlumbCMD</h3>
+    <p>For plumbers. Emergency leaks, clogged drains, water heater issues, pipe repair, new installs. Customer describes the problem → you get a text.</p>
+    <div class="tags">
+      <span>Pipe</span><span>Drain</span><span>Heater</span><span>Emergency</span>
+    </div>
+    <div class="actions">
+      <a href="#" class="secondary">Preview soon</a>
+    </div>
+  </div>
+
+  <!-- HVACMD -->
+  <div class="card">
+    <div class="icon">❄️</div>
+    <div class="status coming">● BUILDING</div>
+    <h3>HVACCMD</h3>
+    <p>For HVAC techs. No cooling, no heat, strange noises, thermostat issues, maintenance. Quick intake before the service call.</p>
+    <div class="tags">
+      <span>AC</span><span>Furnace</span><span>Thermostat</span><span>Maintenance</span>
+    </div>
+    <div class="actions">
+      <a href="#" class="secondary">Preview soon</a>
+    </div>
+  </div>
+
+  <!-- TowCMD -->
+  <div class="card">
+    <div class="icon">🚛</div>
+    <div class="status coming">● BUILDING</div>
+    <h3>TowCMD</h3>
+    <p>For tow truck operators. Vehicle type, location, breakdown type, destination. Customer sends you exactly what you need to dispatch.</p>
+    <div class="tags">
+      <span>Tow</span><span>Jump start</span><span>Lockout</span><span>Tire</span>
+    </div>
+    <div class="actions">
+      <a href="#" class="secondary">Preview soon</a>
+    </div>
+  </div>
+
+  <!-- ElecCMD -->
+  <div class="card">
+    <div class="icon">⚡</div>
+    <div class="status coming">● BUILDING</div>
+    <h3>ElecCMD</h3>
+    <p>For electricians. Tripped breakers, flickering lights, outlet problems, panel upgrades, wiring issues. Structured intake for electrical work.</p>
+    <div class="tags">
+      <span>Panel</span><span>Wiring</span><span>Outlet</span><span>Emergency</span>
+    </div>
+    <div class="actions">
+      <a href="#" class="secondary">Preview soon</a>
+    </div>
+  </div>
+
+  <!-- TreeCMD -->
+  <div class="card">
+    <div class="icon">🌳</div>
+    <div class="status coming">● BUILDING</div>
+    <h3>TreeCMD</h3>
+    <p>For tree services. Tree removal, trimming, stump grinding, emergency storm damage. Describe the job → get a callback with a quote.</p>
+    <div class="tags">
+      <span>Removal</span><span>Trimming</span><span>Stump</span><span>Storm</span>
+    </div>
+    <div class="actions">
+      <a href="#" class="secondary">Preview soon</a>
+    </div>
+  </div>
+
+  <!-- PestCMD -->
+  <div class="card">
+    <div class="icon">🐜</div>
+    <div class="status coming">● BUILDING</div>
+    <h3>PestCMD</h3>
+    <p>For exterminators. Pest type, infestation level, property type, treatment needed. Fast intake for pest control companies.</p>
+    <div class="tags">
+      <span>Rodent</span><span>Insect</span><span>Termite</span><span>Inspection</span>
+    </div>
+    <div class="actions">
+      <a href="#" class="secondary">Preview soon</a>
+    </div>
+  </div>
+
+  <!-- PoolCMD -->
+  <div class="card">
+    <div class="icon">🏊</div>
+    <div class="status coming">● BUILDING</div>
+    <h3>PoolCMD</h3>
+    <p>For pool service techs. Green pool, pump issues, filter problems, chemical imbalance. Pre-service intake for pool maintenance.</p>
+    <div class="tags">
+      <span>Pump</span><span>Filter</span><span>Clean</span><span>Chemical</span>
+    </div>
+    <div class="actions">
+      <a href="#" class="secondary">Preview soon</a>
+    </div>
+  </div>
+
+  <!-- GarageCMD -->
+  <div class="card">
+    <div class="icon">🚪</div>
+    <div class="status coming">● BUILDING</div>
+    <h3>GarageCMD</h3>
+    <p>For garage door repair. Broken spring, opener issues, off-track, panel damage, new install. Fast intake for door techs.</p>
+    <div class="tags">
+      <span>Spring</span><span>Opener</span><span>Track</span><span>Panel</span>
+    </div>
+    <div class="actions">
+      <a href="#" class="secondary">Preview soon</a>
+    </div>
+  </div>
+
+</div>
+
+<h2 class="section-title">Why This Works</h2>
+<div class="specs">
+  <strong>For the business owner:</strong>
+  <ul>
+    <li>Customers tell you what they need instantly — no phone tag, no "I'll call you back"</li>
+    <li>Structured intake means you get clean, consistent info every time</li>
+    <li>Self-hosted on your own GitHub Pages or website — zero recurring cost</li>
+    <li>PIN-protected settings so customers can't change your config</li>
+    <li>Export/import settings for backup between devices</li>
+  </ul>
+  <br>
+  <strong>For the customer:</strong>
+  <ul>
+    <li>No download, no account creation, no login required</li>
+    <li>Answers 5-6 simple questions — takes 30 seconds</li>
+    <li>Press one button — their phone opens a pre-written text or email</li>
+    <li>They just tap "Send" and the business gets their request</li>
+  </ul>
+  <br>
+  <strong>Technical:</strong>
+  <ul>
+    <li>Single HTML file — open it on any phone, tablet, or desktop browser</li>
+    <li>No backend, no database, no API calls — fully self-contained</li>
+    <li>Settings stored in browser localStorage (no account needed)</li>
+    <li>Works as a standalone link OR embeddable on any website</li>
+    <li>SMS and email links use the business's actual contact info</li>
+  </ul>
+</div>
+
+<div style="text-align:center;padding:32px 0 48px;color:var(--muted);font-size:12px">
+  Built by Frantz Enterprise · Powered by single-file zero-infrastructure architecture · &copy; 2026
+</div>
+
+</div>
+</body>
+</html>
