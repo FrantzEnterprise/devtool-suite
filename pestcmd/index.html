@@ -302,7 +302,7 @@ function sha256(str){
 }
 var defaultSettings = {
   bizName:'Pest Shield Pro',phone:'',email:'',country:'1',
-  tabs:{resi:true,comm:true,emerg:true},
+  tabs:{resi:true,comm:true,wildlife:true},
   services:{
     resi:["Ants / roaches","Spiders / bugs","Termites / wood damage","Bed bugs","Fleas / ticks","Rodent droppings"],
     comm:["Restaurant / kitchen","Office / retail","Warehouse","Apartment building","School / daycare","Medical facility"],
@@ -344,7 +344,7 @@ function applySettings(){
 
 var setupStep=0;
 function initSetupTabs(){
-  var s=settings,labels={resi:'Residential',comm:'Commercial',emerg:'Emergency'};
+  var s=settings,labels={resi:'Residential',comm:'Commercial',wildlife:'Wildlife'};
   var el=document.getElementById('setupTabs');if(!el)return;
   el.innerHTML='';
   for(var k in labels){
@@ -442,7 +442,7 @@ function handleSettingsDone(){
 function updateSettingsDrawer(){
   if(!document.getElementById('setBizName'))return;
   var s=settings;
-  var labels={resi:'Residential',comm:'Commercial',emerg:'Emergency'};
+  var labels={resi:'Residential',comm:'Commercial',wildlife:'Wildlife'};
   var el=document.getElementById('settingsTabs');if(!el)return;
   el.innerHTML='';
   for(var k in s.tabs){
@@ -606,7 +606,7 @@ function showResult(key){
   var asb=document.getElementById('addServiceBtns');
   if(asb){
     asb.innerHTML='';
-    var cat={resi:'Residential',comm:'Commercial',emerg:'Emergency'};
+    var cat={resi:'Residential',comm:'Commercial',wildlife:'Wildlife'};
     for(var ck in cat){
       if(ck===key||!settings.tabs[ck])continue;
       (function(kk,label){
