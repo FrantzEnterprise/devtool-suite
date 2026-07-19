@@ -477,9 +477,9 @@ function updateSettingsDrawer(){
       h.textContent=labels[sk];
       div.appendChild(h);
       var allOptions=[];
-      if(sk==='resi')allOptions=["Leaky faucet","Clogged drain","Running toilet","Water heater issue","Pipe burst / leak","Sewer line backup"];
-      else if(sk==='comm')allOptions=["Drain cleaning","Water heater install","Pipe repair / repipe","Backflow testing","Grease trap","New construction plumbing"];
-      else if(sk==='maintenance')allOptions=["Burst pipe","Sewage backup","Gas leak (suspect)","No water","Water heater failure","Flooding"];
+      if(sk==='resi')allOptions=["AC not cooling","AC not turning on","Furnace not heating","Thermostat issue","Strange noise / smell","Maintenance / tune-up"];
+      else if(sk==='comm')allOptions=["RTU service","Split system repair","Ductwork issue","Thermostat / BMS","Preventive maintenance","New system quote"];
+      else if(sk==='maintenance')allOptions=["Tune-up / maintenance","Filter change","Duct cleaning","Refrigerant top-up","Inspection","Second opinion"];
       for(var si=0;si<allOptions.length;si++){
         var opt=allOptions[si];
         var cb=document.createElement('label');
